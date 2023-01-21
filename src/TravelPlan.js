@@ -56,7 +56,6 @@ const useStyles = makeStyles({
 
 export const TravelPlan = () => {
     const arr = ['Ontario Science Centre', 'CN Tower', 'Royal Ontario Museum', '...']
-    console.log('in travel plan');
 
     const classes = useStyles();
 

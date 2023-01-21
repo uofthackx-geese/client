@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { NodePresentation } from './presentation'
 
-// TODO: may need a handleOnClickProp
 export const NodeContainer = ({
     title,
     description,
+    handleTravelClick,
     type,
     isAbleToAddToTrip,
 }) => {
@@ -19,6 +19,7 @@ export const NodeContainer = ({
         <NodePresentation 
             title={title} 
             description={description} 
+            handleTravelClick={handleTravelClick}
             type={type}
             isAbleToAddToTrip={isAbleToAddToTrip}
             handleAddToTrip={handleAddToTrip}

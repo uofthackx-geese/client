@@ -17,17 +17,18 @@ export const ExplorePagePresentation = ({
     firstNodeInfo,
     secondNodeInfo,
     thirdNodeInfo,
+    handleTravelClick,
 }) => {
     const classes = useStyles();
-
+    
     return (
         <>
             <Header page="TRAVEL PLAN"/>
             <Box className={classes.explorePageContainer}>
                 <Node title={originNodeInfo.title} description={originNodeInfo.description} type='originNode' />
-                <Node title={firstNodeInfo.title} description={firstNodeInfo.description} type='firstNode' />
-                <Node title={secondNodeInfo.title} description={secondNodeInfo.description} type='secondNode' />
-                <Node title={thirdNodeInfo.title} description={thirdNodeInfo.description} type='thirdNode' />
+                <Node title={firstNodeInfo.title} description={firstNodeInfo.description} type='firstNode' handleTravelClick={handleTravelClick} />
+                <Node title={secondNodeInfo.title} description={secondNodeInfo.description} type='secondNode' handleTravelClick={handleTravelClick} />
+                <Node title={thirdNodeInfo.title} description={thirdNodeInfo.description} type='thirdNode' handleTravelClick={handleTravelClick} />
             </Box>
         </>
     )
