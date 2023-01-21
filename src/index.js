@@ -10,6 +10,8 @@ import { Demo } from './Demo'
 import { LoginPage } from './pages/LoginPage';
 import { TripPage } from './pages/TripPage';
 import { ExplorePage } from './pages/ExplorePage';
+import { Login } from './Login'
+import { TravelPlan } from './TravelPlan'
 
 const router = createBrowserRouter([
   {
@@ -23,11 +25,15 @@ const router = createBrowserRouter([
   // Actual paths:
   {
     path: "/login",
-    element: <LoginPage />
+    element: <Login />  // LoginPage
   },
+  // {
+  //   path: "/trip",
+  //   element: <TripPage />
+  // },
   {
-    path: "/trip",
-    element: <TripPage />
+    path: "/travelplan",
+    element: <TravelPlan />
   },
   {
     path: "/explore",

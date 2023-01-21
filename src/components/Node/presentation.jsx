@@ -12,5 +12,5 @@ export const NodePresentation = ({
     handleAddToTrip,
 }) => {
     // const isClickable = 
-    return <div />
+    return <div>{title} {description}</div>
 }
