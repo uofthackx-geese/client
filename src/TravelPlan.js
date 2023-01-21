@@ -2,6 +2,8 @@ import React from 'react'
 import { makeStyles } from '@mui/styles'
 import { fabClasses } from '@mui/material'
 import Header from './components/Header'
+import {RxCross1} from 'react-icons/rx'
+import './TravelPlan.css'
 
 const useStyles = makeStyles({
     container: {
@@ -15,18 +17,13 @@ const useStyles = makeStyles({
     },
     innerThing: {
         width: '100%',
-        height: '900px',
+        minHeight: '900px',
+        height: '100%',
         backgroundColor: 'lightblue',
+        paddingLeft: '5%'
     },
     mySpan: {
         color: 'black',
-    },
-    head1: {
-        color: 'darkblue',
-        textAlign: 'center',
-        justifyContent: 'center',
-        marginLeft: 'auto',
-        marginRight: 'auto',
     },
     head2: {
         color: 'black',
@@ -46,16 +43,17 @@ const useStyles = makeStyles({
         listStyle: 'decimal',
         fontSize: '20px',
         fontWeight: 'bold',
-        marginLeft: '565px',
-        marginRight: 'auto',
+        width: '100%'
     },
-    li: {
-        margin: '10px',
+    liIndex: {
+        border: '1px rgba(0, 0, 0, 0.3) solid',
+        padding: '5px',
+        borderRadius: '3px'
     }
 })
 
 export const TravelPlan = () => {
-    const arr = ['Ontario Science Centre', 'CN Tower', 'Royal Ontario Museum', '...']
+    const arr = ['Ontario Science Centre', 'CN Tower', 'Royal Ontario Museumdedewddewefwfweedewddewefwfweedewddewefwfwe']
     console.log('in travel plan');
 
     const classes = useStyles();
@@ -64,11 +62,22 @@ export const TravelPlan = () => {
         <>
         <div className={classes.container}>
             <div className={classes.innerThing}>
-                <h1 className={classes.head1}>Travel Plan</h1>
-
-                <br></br>
-
-                <ol className={classes.orderedlist}>{arr.map(item => <div><li className={classes.li}>{item}</li></div>)}</ol>
+                <div style={{height: '100px'}}></div>
+                <div id='TPcountry'>Canada</div>
+                <div id='TPsubbody'>
+                    <div>
+                        <div className='TPcity'>Toronto</div>
+                        <ol className={classes.orderedlist}>{arr.map((item, index) => <div className='liBox'><div className={classes.liIndex}>{index + 1}</div> <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item}</div> <div id='liCross'><RxCross1/></div></div>)}</ol>
+                    </div>
+                    <div>
+                        <div className='TPcity'>Ottawa</div>
+                        <ol className={classes.orderedlist}>{arr.map((item, index) => <div className='liBox'><div className={classes.liIndex}>{index + 1}</div> <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item}</div> <div id='liCross'><RxCross1/></div></div>)}</ol>
+                    </div>
+                    <div>
+                        <div className='TPcity'>Vancouver</div>
+                        <ol className={classes.orderedlist}>{arr.map((item, index) => <div className='liBox'><div className={classes.liIndex}>{index + 1}</div> <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item}</div> <div id='liCross'><RxCross1/></div></div>)}</ol>
+                    </div>
+                </div>
             </div>
         </div >
         <Header page="EXPLORE"/>
