@@ -5,6 +5,7 @@ import { NodePresentation } from './presentation'
 export const NodeContainer = ({
     title,
     description,
+    handleTravelClick,
     type,
     isAbleToAddToTrip,
 }) => {
@@ -15,10 +16,14 @@ export const NodeContainer = ({
         setIsAddedToTrip(true);
     }
 
+    console.log(2)
+    console.log(handleTravelClick)
+
     return (
         <NodePresentation 
             title={title} 
             description={description} 
+            handleTravelClick={handleTravelClick}
             type={type}
             isAbleToAddToTrip={isAbleToAddToTrip}
             handleAddToTrip={handleAddToTrip}
