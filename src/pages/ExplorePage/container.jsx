@@ -24,7 +24,7 @@ export const ExplorePageContainer = () => {
         })
         setSecondNodeInfo({
             title: 'Waterloo',
-            description: 'this is waterloo description',
+            description: 'The University of Waterloo is a public research university with a main campus in Waterloo, Ontario, Canada. The main campus is on 404 hectares of land adjacent to "Uptown" Waterloo and Waterloo Park. The university also operates three satellite campuses and four affiliated university colleges.',
         })
         setThirdNodeInfo({
             title: 'Vancouver',

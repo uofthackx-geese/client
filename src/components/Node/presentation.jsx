@@ -50,7 +50,7 @@ export const NodePresentation = ({
     const classes = useStyles();
 
     return (
-        <DescriptionTooltip>
+        <DescriptionTooltip title={title} description={description}>
             <Box className={`${classes.nodeContainer} ${classes[type]}`}>
                 <div className={classes.nodeContent}>
                     {title}
