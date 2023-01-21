@@ -1,11 +1,12 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
 import { fabClasses } from '@mui/material'
+import Header from './components/Header'
 
 const useStyles = makeStyles({
     container: {
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     header: {
         justifyContent: 'center',
@@ -60,14 +61,17 @@ export const TravelPlan = () => {
     const classes = useStyles();
 
     return (
+        <>
         <div className={classes.container}>
             <div className={classes.innerThing}>
                 <h1 className={classes.head1}>Travel Plan</h1>
 
                 <br></br>
 
-                <ol className={classes.orderedlist}>{arr.map(item => <div><li className={classes.li}>{item}</li></div>)}</ol>
+                <ol className={classes.orderedlist}>{arr.map(item => <div key={item}><li className={classes.li}>{item}</li></div>)}</ol>
             </div>
-        </div >
+        </div>
+        <Header page="EXPLORE"/>
+        </>
     )
 }
