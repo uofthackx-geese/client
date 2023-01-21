@@ -18,19 +18,7 @@ export const getCities = async (country) => {
 }
 
 export const getCityDescriptions = async (cities) => {
-
-    // const results = await Promise.all(cities.map(async (city) => {
-    //     console.log()
-    //     return await getCityDescription(city);
-    // }))
-
-    // return results;
-    // // Promise.all(cities.map(async (city) => {
-    // //     await getCityDescription(city);
-    // // })).then((values) => {
-    // //     console.log(values)
-    // //     return values;
-    // // });
+    // TODO: call getCityDescriptions
     return Promise.resolve(['toronto desc', 'waterloo desc', 'vanc desc']);
 }
 
@@ -50,8 +38,8 @@ export const getDestinations = async (type) => {
 
 export const getDestinationDescriptions = async (destinations) => {
     // TODO: call getDestinationDescription
-    return Promise.resolve('yummy donuts are here please come visit',
-    'chipotle is the best', 'pai is expensive apparently yummy');
+    return Promise.resolve(['yummy donuts are here please come visit',
+    'chipotle is the best', 'pai is expensive apparently yummy']);
 }
 
 export const getDestinationDescription = async (destination) => {

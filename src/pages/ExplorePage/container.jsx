@@ -12,8 +12,6 @@ import {
 } from './api';
 
 export const ExplorePageContainer = () => {
-    // useFetch hook, may need a subcomponent to call useFetch on prop = current node??
-
     const [originNodeInfo, setOriginNodeInfo] = useState(null);
     const [firstNodeInfo, setFirstNodeInfo] = useState(null);
     const [secondNodeInfo, setSecondNodeInfo] = useState(null);
@@ -23,7 +21,6 @@ export const ExplorePageContainer = () => {
     const [city, setCity] = useState(null);
     const [type, setType] = useState(null);
 
-    // temporary until we actually call the APIs
     useEffect(() => {
         if (type) { // Next nodes are destinations
             const populateNodesFromType = async () => {
@@ -102,12 +99,25 @@ export const ExplorePageContainer = () => {
         }
     }, [country, city, type])
 
+    const handleTravelClick = (title) => {
+        if (type) {
+            return;
+        }
+        
+        if (city) {
+            setType(title)
+        } else if (country) {
+            setCity(title);
+        }
+    }
+        
     return originNodeInfo && firstNodeInfo && secondNodeInfo && thirdNodeInfo 
         ? <ExplorePagePresentation 
-            originNodeInfo={originNodeInfo} 
-            firstNodeInfo={firstNodeInfo} 
-            secondNodeInfo={secondNodeInfo} 
+            originNodeInfo={originNodeInfo}
+            firstNodeInfo={firstNodeInfo}
+            secondNodeInfo={secondNodeInfo}
             thirdNodeInfo={thirdNodeInfo}
+            handleTravelClick={handleTravelClick}
             /> 
         : <Loader />
 }
