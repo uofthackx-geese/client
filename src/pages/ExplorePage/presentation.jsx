@@ -20,10 +20,7 @@ export const ExplorePagePresentation = ({
     handleTravelClick,
 }) => {
     const classes = useStyles();
-
-    console.log(1)
-    console.log(handleTravelClick)
-        
+    
     return (
         <>
             <Header page="TRAVEL PLAN"/>

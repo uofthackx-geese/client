@@ -100,10 +100,10 @@ export const ExplorePageContainer = () => {
     }, [country, city, type])
 
     const handleTravelClick = (title) => {
-        if (type) {
+        if (type) { // Clicking on the next nodes (destinations) when we're already at a type shouldn't do anything.
             return;
         }
-        
+
         if (city) {
             setType(title)
         } else if (country) {

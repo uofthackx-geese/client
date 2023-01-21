@@ -16,9 +16,6 @@ export const NodeContainer = ({
         setIsAddedToTrip(true);
     }
 
-    console.log(2)
-    console.log(handleTravelClick)
-
     return (
         <NodePresentation 
             title={title} 

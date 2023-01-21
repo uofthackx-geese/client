@@ -44,8 +44,6 @@ const useStyles = makeStyles({
 })
 
 export const Login = () => {
-    console.log('in login');
-
     const classes = useStyles();
 
     return (
