@@ -19,11 +19,23 @@ export const getCities = async (country) => {
 }
 
 export const getCityDescriptions = async (cities) => {
-    return Promise.all(cities.map(async (city) => {
-        return await getCityDescription(city);
-    }));
+
+    // const results = await Promise.all(cities.map(async (city) => {
+    //     console.log()
+    //     return await getCityDescription(city);
+    // }))
+
+    // return results;
+    // // Promise.all(cities.map(async (city) => {
+    // //     await getCityDescription(city);
+    // // })).then((values) => {
+    // //     console.log(values)
+    // //     return values;
+    // // });
+    return Promise.resolve(['toronto desc', 'waterloo desc', 'vanc desc']);
 }
 
 export const getCityDescription = async (city) => {
+    console.log(city);
     return Promise.resolve(`This is description for ${city}`);
 }

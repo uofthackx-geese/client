@@ -34,8 +34,9 @@ export const ExplorePageContainer = () => {
                         description: countryDescription,
                     });
                 });
-                
+                console.log('part 1')
                 const descriptions = await getCityDescriptions(cities);
+                console.log('part2')
                 setFirstNodeInfo({
                     title: cities[0],
                     description: descriptions[0],
