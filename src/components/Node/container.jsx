@@ -7,6 +7,7 @@ export const NodeContainer = ({
     handleTravelClick,
     type,
     isAbleToAddToTrip,
+    opacity,
 }) => {
     // TODO: either require caching for this state to persist or access DB to check if already added to Trip.
     const [isAddedToTrip, setIsAddedToTrip] = useState(false);
@@ -23,6 +24,7 @@ export const NodeContainer = ({
             type={type}
             isAbleToAddToTrip={isAbleToAddToTrip}
             handleAddToTrip={handleAddToTrip}
+            opacity={opacity}
         />
     );
 }
