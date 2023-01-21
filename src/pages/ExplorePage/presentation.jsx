@@ -66,7 +66,7 @@ export const ExplorePagePresentation = ({
                     <Node title={thirdNodeInfo.title} description={thirdNodeInfo.description} type='thirdNode' handleTravelClick={transitionHandleTravelClick} />
                 </NodeAnimation>
 
-                <Header page="EXPLORE" />
+            <Header page="TRAVEL PLAN" />
             </Box>
 
         </>
