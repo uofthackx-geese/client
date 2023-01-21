@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { NodePresentation } from './presentation'
 
-// TODO: may need a handleOnClickProp
 export const NodeContainer = ({
     title,
     description,
