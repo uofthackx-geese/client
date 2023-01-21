@@ -33,14 +33,17 @@ export const ExplorePageContainer = () => {
                 setFirstNodeInfo({
                     title: destinations[0],
                     description: descriptions[0],
+                    isTerminal: true,
                 })
                 setSecondNodeInfo({
                     title: destinations[1],
                     description: descriptions[1],
+                    isTerminal: true,
                 })
                 setThirdNodeInfo({
                     title: destinations[2],
                     description: descriptions[2],
+                    isTerminal: true,
                 })
             }
             populateNodesFromType();
