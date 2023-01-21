@@ -68,7 +68,7 @@ export const TravelPlan = () => {
 
                 <br></br>
 
-                <ol className={classes.orderedlist}>{arr.map(item => <div><li className={classes.li}>{item}</li></div>)}</ol>
+                <ol className={classes.orderedlist}>{arr.map(item => <div key={item}><li className={classes.li}>{item}</li></div>)}</ol>
             </div>
         </div >
         <Header page="EXPLORE"/>
