@@ -17,22 +17,22 @@ const useStyles = makeStyles({
     originNode: {
         left: '50%',
         marginLeft: '-100px', // Half of width
-        top: '68%',
+        top: '73%',
     },
     firstNode: {
         left: '20%',
         marginLeft: '-100px', // Half of width
-        top: '30%',
+        top: '35%',
     },
     secondNode: {
         left: '50%',
         marginLeft: '-100px', // Half of width
-        top: '12%',
+        top: '17%',
     },
     thirdNode: {
         left: '80%',
         marginLeft: '-100px', // Half of width
-        top: '30%',
+        top: '35%',
     },
     nodeContent: {
         margin: 'auto',

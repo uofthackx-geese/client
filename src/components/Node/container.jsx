@@ -7,6 +7,7 @@ export const NodeContainer = ({
     handleTravelClick,
     type,
     isAbleToAddToTrip,
+    isTerminal,
 }) => {
     // TODO: either require caching for this state to persist or access DB to check if already added to Trip.
     const [isAddedToTrip, setIsAddedToTrip] = useState(false);
@@ -19,10 +20,10 @@ export const NodeContainer = ({
         <NodePresentation 
             title={title} 
             description={description} 
-            handleTravelClick={handleTravelClick}
+            handleTravelClick={isTerminal ? () => {} : handleTravelClick}
             type={type}
-            isAbleToAddToTrip={isAbleToAddToTrip}
-            handleAddToTrip={handleAddToTrip}
+            // isAbleToAddToTrip={isAbleToAddToTrip}
+            // handleAddToTrip={handleAddToTrip}
         />
     );
 }

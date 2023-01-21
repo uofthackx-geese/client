@@ -20,7 +20,7 @@
     }
 
     #liCross {
-        margin-top: 7px;
+        margin-top: 4px;
     }
 
     #liCross:hover {
@@ -43,4 +43,14 @@
     .TPcity {
         font-weight: bold;
         font-size: 1.5rem;
+        width: fit-content;
+        padding: 10px;
+        transition: 0.5s;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .TPcity:hover {
+        background-color: #89CFF0;
+        border: gray solid 0.5px;
     }

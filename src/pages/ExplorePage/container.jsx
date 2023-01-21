@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Loader } from '../../components/Loader';
 import { ExplorePagePresentation } from './presentation';
-import { 
-    getCountryDescription, 
-    getCities, 
-    getCityDescriptions, 
-    getCityDescription, 
+import {
+    getCountryDescription,
+    getCities,
+    getCityDescriptions,
+    getCityDescription,
     getTypes,
-    getDestinations, 
+    getDestinations,
     getDestinationDescriptions
 } from './api';
 
@@ -33,14 +33,17 @@ export const ExplorePageContainer = () => {
                 setFirstNodeInfo({
                     title: destinations[0],
                     description: descriptions[0],
+                    isTerminal: true,
                 })
                 setSecondNodeInfo({
                     title: destinations[1],
                     description: descriptions[1],
+                    isTerminal: true,
                 })
                 setThirdNodeInfo({
                     title: destinations[2],
                     description: descriptions[2],
+                    isTerminal: true,
                 })
             }
             populateNodesFromType();
@@ -50,22 +53,22 @@ export const ExplorePageContainer = () => {
                 let types = [];
 
                 Promise.all([await getCityDescription(city), await getTypes(city)])
-                .then((values) => {
-                    [cityDescription, types] = values;
-                    setOriginNodeInfo({
-                        title: city,
-                        description: cityDescription,
+                    .then((values) => {
+                        [cityDescription, types] = values;
+                        setOriginNodeInfo({
+                            title: city,
+                            description: cityDescription,
+                        });
+                        setFirstNodeInfo({
+                            title: types[0],
+                        })
+                        setSecondNodeInfo({
+                            title: types[1],
+                        })
+                        setThirdNodeInfo({
+                            title: types[2],
+                        })
                     });
-                    setFirstNodeInfo({
-                        title: types[0],
-                    })
-                    setSecondNodeInfo({
-                        title: types[1],
-                    })
-                    setThirdNodeInfo({
-                        title: types[2],
-                    })
-                });
             }
             populateNodesFromCity();
         } else { // Next nodes are cities
@@ -74,13 +77,13 @@ export const ExplorePageContainer = () => {
                 let cities = [];
 
                 Promise.all([await getCountryDescription(country), await getCities(country)])
-                .then((values) => {
-                    [countryDescription, cities] = values;
-                    setOriginNodeInfo({
-                        title: country,
-                        description: countryDescription,
+                    .then((values) => {
+                        [countryDescription, cities] = values;
+                        setOriginNodeInfo({
+                            title: country,
+                            description: countryDescription,
+                        });
                     });
-                });
                 const descriptions = await getCityDescriptions(cities);
                 setFirstNodeInfo({
                     title: cities[0],
@@ -110,14 +113,14 @@ export const ExplorePageContainer = () => {
             setCity(title);
         }
     }
-        
-    return originNodeInfo && firstNodeInfo && secondNodeInfo && thirdNodeInfo 
-        ? <ExplorePagePresentation 
+
+    return originNodeInfo && firstNodeInfo && secondNodeInfo && thirdNodeInfo
+        ? <ExplorePagePresentation
             originNodeInfo={originNodeInfo}
             firstNodeInfo={firstNodeInfo}
             secondNodeInfo={secondNodeInfo}
             thirdNodeInfo={thirdNodeInfo}
             handleTravelClick={handleTravelClick}
-            /> 
+        />
         : <Loader />
 }
