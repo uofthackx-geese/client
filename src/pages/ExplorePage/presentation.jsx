@@ -47,22 +47,30 @@ export const ExplorePagePresentation = ({
 
     return (
         <>
-            <FourthArrow className={classes.arrow4} />
 
             <Box className={classes.explorePageContainer}>
                 <NodeAnimation inProp={inProp} easeIn={500} easeOut={300}>
-                    <FirstArrow className={classes.arrow1} />
+                    <Box sx={{pointerEvents: 'none'}}>
+                        <FirstArrow className={classes.arrow1} />
+                    </Box>
                     <Node title={originNodeInfo.title} description={originNodeInfo.description} type='originNode' />
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} easeIn={700} easeOut={500}>
-                    <SecondArrow className={classes.arrow2} />
+                    <Box sx={{pointerEvents: 'none'}}>
+                        <SecondArrow className={classes.arrow2} />
+                    </Box>
                     <Node title={firstNodeInfo.title} description={firstNodeInfo.description} type='firstNode' handleTravelClick={transitionHandleTravelClick} />
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} easeIn={700} easeOut={500}>
-                    <ThirdArrow className={classes.arrow3} />
+                    <Box sx={{pointerEvents: 'none'}}>
+                        <ThirdArrow className={classes.arrow3} />
+                    </Box>
                     <Node title={secondNodeInfo.title} description={secondNodeInfo.description} type='secondNode' handleTravelClick={transitionHandleTravelClick} />
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} easeIn={700} easeOut={500}>
+                    <Box sx={{pointerEvents: 'none'}}>
+                        <FourthArrow className={classes.arrow4} />
+                    </Box>
                     <Node title={thirdNodeInfo.title} description={thirdNodeInfo.description} type='thirdNode' handleTravelClick={transitionHandleTravelClick} />
                 </NodeAnimation>
 
