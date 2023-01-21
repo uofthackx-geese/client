@@ -120,11 +120,8 @@ export const TravelPlan = () => {
             }
         ]
     })
-    console.log(travelPlan)
     const [isShowDialog, setIsShowDialog] = useState(false)
     const [payload, setPayload] = useState(null)
-    const [isClickCross, setIsClickCross] = useState(false)
-    const [isClickDest, setIsClickDest] = useState(false)
 
     const deleteDestination = (city, destinationTitle) => {
         let tempPlan = {...travelPlan}
@@ -136,18 +133,6 @@ export const TravelPlan = () => {
             }
         }
     }
-
-    useEffect = (() => {
-        if (isClickDest) {
-            setIsClickDest(false)
-            setIsShowDialog(true)
-            
-        }
-        if (isClickCross) {
-            setIsClickCross(false)
-            deleteDestination(isClickCross.city, isClickCross.title)
-        }
-    })
 
     const classes = useStyles();
 
