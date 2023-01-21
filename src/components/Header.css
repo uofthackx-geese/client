@@ -1,0 +1,27 @@
+    #header-parent {
+        background-color: rgb(12, 155, 198);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #header-button {
+        margin-right: 3vw;
+        padding: 10px;
+        border-radius: 10px;
+        border: solid 2px black;
+        cursor: pointer;
+        background-color: aliceblue;
+    }
+
+    #header-button:hover {
+        background-color: white;
+    }
+
+    #header-button:active {
+        background-color: whitesmoke;
+    }
