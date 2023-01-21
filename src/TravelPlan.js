@@ -79,7 +79,7 @@ export const TravelPlan = () => {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
         <Header page="EXPLORE"/>
         </>
     )
