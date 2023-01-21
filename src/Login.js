@@ -11,9 +11,6 @@ const useStyles = makeStyles({
         height: '900px',
         backgroundColor: 'lightblue',
     },
-    mySpan: {
-        color: 'black',
-    },
     head1: {
         color: 'black',
         width: '100%',
@@ -22,24 +19,22 @@ const useStyles = makeStyles({
     },
     head2: {
         color: 'black',
+        width: '100%',
         textAlign: 'center'
-    },
-    label: {
-        color: 'black',
-        justifyContent: 'center',
     },
     btn: {
         width: '60px',
         height: '30px',
         fontWeight: 'bold',
         color: 'black',
-        backgroundColor: 'pink',
+        backgroundColor: 'whitesmoke',
         fontSize: '20px',
     },
     signin: {
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        width: '8em',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })
 
@@ -55,20 +50,24 @@ export const Login = () => {
 
                 <h2 className={classes.head2}>Login</h2>
 
-                <form className={classes.signin}>
-                    <label className={classes.label} for="username">Username: </label>
-                    <input type="text" id="username"></input>
+                <br></br>
 
-                    <br></br>
+                <div>
+                    <form className={classes.signin}>
+                        <label for="username">Username</label>
+                        <input type="text" id="username"></input>
 
-                    <label className={classes.label} for="password">Password: </label>
-                    <input type="password" id="password"></input>
+                        <br></br>
 
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <button className={classes.btn}>Go!</button>
-                </form>
+                        <label for="password">Password</label>
+                        <input type="password" id="password"></input>
+
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <button className={classes.btn}>Go!</button>
+                    </form>
+                </div>
             </div>
         </div>
     )

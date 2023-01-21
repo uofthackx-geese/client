@@ -12,6 +12,7 @@ const useStyles = makeStyles({
         width: '200px',
         height: '100px',
         position: 'absolute',
+        cursor: 'pointer',
     },
     originNode: {
         left: '50%',
