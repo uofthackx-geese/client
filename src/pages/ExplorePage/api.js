@@ -1,20 +1,19 @@
-import { generate } from Cohere.js
+import { generate } from "./Cohere.js"
 
 // populateNodesFromCountry
 export const getCountryDescription = async (country) => {
-    return Promise.resolve(generate(`Describe ${country}:`) + "...");
+    return Promise.resolve(await generate(`Describe ${country}:`) + "...");
 }
 
 export const getCities = async (country) => {
-    let citiesRaw = generate(`List the 3 most popular cities in ${country}:`);
-    
+    let citiesRaw = await generate(`List the 3 most popular cities in ${country}:`);
     // Remove newlines and numbers
     citiesRaw = citiesRaw.replace("\n1.", "");
     citiesRaw = citiesRaw.replace("\n2.", "");
     citiesRaw = citiesRaw.replace("\n3.", "");
 
     // Split by spaces
-    popularCities = citiesRaw.split(" ");
+    let popularCities = citiesRaw.split(" ");
     popularCities.shift(); // shift by 1 index (because first is empty)
 
     return Promise.resolve(popularCities);
@@ -27,7 +26,7 @@ export const getCityDescriptions = async (cities) => {
 
 // populateNodesFromCity
 export const getCityDescription = async (city) => {
-    return Promise.resolve(generate(`Describe ${city}:`) + "...");
+    return Promise.resolve(await generate(`Describe ${city}:`) + "...");
 }
 
 export const getTypes = async (city) => {
@@ -36,7 +35,7 @@ export const getTypes = async (city) => {
 
 // populateNodesFromType
 export const getDestinations = async (type, city, country) => {
-    let destinationsRaw = generate(`List the 3 most popular ${type} in ${city}, ${country}:`);
+    let destinationsRaw = await generate(`List the 3 most popular ${type} in ${city}, ${country}:`);
     
     // Remove newlines and numbers
     destinationsRaw = destinationsRaw.replace("\n1.", "");
@@ -44,7 +43,7 @@ export const getDestinations = async (type, city, country) => {
     destinationsRaw = destinationsRaw.replace("\n3.", "");
 
     // Split by spaces
-    popularDestinations = destinationsRaw.split(" ");
+    let popularDestinations = destinationsRaw.split(" ");
     popularDestinations.shift(); // shift by 1 index (because first is empty)
     
     return Promise.resolve(popularDestinations);
@@ -57,5 +56,5 @@ export const getDestinationDescriptions = async (destinations) => {
 }
 
 export const getDestinationDescription = async (destination) => {
-    return Promise.resolve(generate(`Describe ${destination}:`) + "...");
+    return Promise.resolve(await generate(`Describe ${destination}:`) + "...");
 }
