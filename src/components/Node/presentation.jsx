@@ -17,22 +17,22 @@ const useStyles = makeStyles({
     originNode: {
         left: '50%',
         marginLeft: '-100px', // Half of width
-        top: '68%',
+        top: '73%',
     },
     firstNode: {
         left: '20%',
         marginLeft: '-100px', // Half of width
-        top: '30%',
+        top: '35%',
     },
     secondNode: {
         left: '50%',
         marginLeft: '-100px', // Half of width
-        top: '12%',
+        top: '17%',
     },
     thirdNode: {
         left: '80%',
         marginLeft: '-100px', // Half of width
-        top: '30%',
+        top: '35%',
     },
     nodeContent: {
         margin: 'auto',
@@ -48,13 +48,14 @@ export const NodePresentation = ({
     type, // One of originNode, firstNode, secondNode, thirdNode
     isAbleToAddToTrip,
     handleAddToTrip,
+    opacity
 }) => {
     const classes = useStyles();
 
     const handleClick = handleTravelClick ? () => handleTravelClick(title) : () => {}
 
     return (
-        <DescriptionTooltip title={title} description={description || ''}>
+        <DescriptionTooltip title={title} description={description || ''} opacity={opacity}>
             <Box className={`${classes.nodeContainer} ${classes[type]}`} onClick={handleClick}>
                 <div className={classes.nodeContent}>
                     {title}
