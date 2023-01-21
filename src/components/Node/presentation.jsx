@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
 import { Box } from '@mui/material'
+import { DescriptionTooltip } from '../DescriptionTooltip/DescriptionTooltip'
 
 const useStyles = makeStyles({
     nodeContainer: {
@@ -49,10 +50,12 @@ export const NodePresentation = ({
     const classes = useStyles();
 
     return (
-        <Box className={`${classes.nodeContainer} ${classes[type]}`}>
-            <div className={classes.nodeContent}>
-                {title}
-            </div>
-        </Box>
+        <DescriptionTooltip>
+            <Box className={`${classes.nodeContainer} ${classes[type]}`}>
+                <div className={classes.nodeContent}>
+                    {title}
+                </div>
+            </Box>
+        </DescriptionTooltip>
     )
 }

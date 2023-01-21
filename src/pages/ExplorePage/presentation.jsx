@@ -11,15 +11,20 @@ const useStyles = makeStyles({
     }
 })
 
-export const ExplorePagePresentation = () => {
+export const ExplorePagePresentation = ({
+    originNodeInfo,
+    firstNodeInfo,
+    secondNodeInfo,
+    thirdNodeInfo,
+}) => {
     const classes = useStyles();
 
     return (
         <Box className={classes.explorePageContainer}>
-            <Node title='originNodewinwiuo hroihrewoirnonerwioni eoirejewrioj eiojeiorejio' description='desc1' type='originNode' />
-            <Node title='firstNode' description='desc2' type='firstNode' />
-            <Node title='secondNode' description='desc3' type='secondNode' />
-            <Node title='thirdNode' description='desc4' type='thirdNode' />
+            <Node title={originNodeInfo.title} description={originNodeInfo.description} type='originNode' />
+            <Node title={firstNodeInfo.title} description={firstNodeInfo.description} type='firstNode' />
+            <Node title={secondNodeInfo.title} description={secondNodeInfo.description} type='secondNode' />
+            <Node title={thirdNodeInfo.title} description={thirdNodeInfo.description} type='thirdNode' />
         </Box>
     )
 }
