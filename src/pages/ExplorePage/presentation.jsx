@@ -47,19 +47,19 @@ export const ExplorePagePresentation = ({
 
     return (
         <>
-            <FirstArrow className={classes.arrow1} />
-            <SecondArrow className={classes.arrow2} />
-            <ThirdArrow className={classes.arrow3} />
             <FourthArrow className={classes.arrow4} />
 
             <Box className={classes.explorePageContainer}>
                 <NodeAnimation inProp={inProp} easeIn={500} easeOut={300}>
+                    <FirstArrow className={classes.arrow1} />
                     <Node title={originNodeInfo.title} description={originNodeInfo.description} type='originNode' />
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} easeIn={700} easeOut={500}>
+                    <SecondArrow className={classes.arrow2} />
                     <Node title={firstNodeInfo.title} description={firstNodeInfo.description} type='firstNode' handleTravelClick={transitionHandleTravelClick} />
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} easeIn={700} easeOut={500}>
+                    <ThirdArrow className={classes.arrow3} />
                     <Node title={secondNodeInfo.title} description={secondNodeInfo.description} type='secondNode' handleTravelClick={transitionHandleTravelClick} />
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} easeIn={700} easeOut={500}>
@@ -67,7 +67,7 @@ export const ExplorePagePresentation = ({
                 </NodeAnimation>
 
                 <Header page="EXPLORE" />
-            </Box >
+            </Box>
 
         </>
     )
