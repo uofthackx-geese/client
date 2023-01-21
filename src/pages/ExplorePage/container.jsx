@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Loader } from '../../components/Loader';
-import { ExplorePagePresentation } from './presentation';
+import { ExplorePagePresentation, SimpleExample } from './presentation';
 import { getCountryDescription, getCities, getCityDescriptions } from './api';
 
 export const ExplorePageContainer = () => {
@@ -27,13 +27,13 @@ export const ExplorePageContainer = () => {
                 let cities = [];
 
                 Promise.all([await getCountryDescription(country), await getCities(country)])
-                .then((values) => {
-                    [countryDescription, cities] = values;
-                    setOriginNodeInfo({
-                        title: country,
-                        description: countryDescription,
+                    .then((values) => {
+                        [countryDescription, cities] = values;
+                        setOriginNodeInfo({
+                            title: country,
+                            description: countryDescription,
+                        });
                     });
-                });
                 console.log('part 1')
                 const descriptions = await getCityDescriptions(cities);
                 console.log('part2')
@@ -54,12 +54,12 @@ export const ExplorePageContainer = () => {
         }
     }, [country, city, type])
 
-    return originNodeInfo && firstNodeInfo && secondNodeInfo && thirdNodeInfo 
-        ? <ExplorePagePresentation 
-            originNodeInfo={originNodeInfo} 
-            firstNodeInfo={firstNodeInfo} 
-            secondNodeInfo={secondNodeInfo} 
+    return originNodeInfo && firstNodeInfo && secondNodeInfo && thirdNodeInfo
+        ? <ExplorePagePresentation
+            originNodeInfo={originNodeInfo}
+            firstNodeInfo={firstNodeInfo}
+            secondNodeInfo={secondNodeInfo}
             thirdNodeInfo={thirdNodeInfo}
-            /> 
+        />
         : <Loader />
 }
