@@ -1,20 +1,23 @@
-// TODO: call cohere api instead of hard-code
-export const getCitiesByCountry = (country) => { 
-    return ['Toronto', 'Waterloo', 'Vancouver']
-}
-
-// TODO: call cohere api instead of hard-code
-export const getAttractionsByCity = (city) => {
-    return ['Toronto Zoo', 'Canada\'s Wonderland', 'CN Tower']
-}
+import { generate } from Cohere.js
 
 // populateNodesFromCountry
 export const getCountryDescription = async (country) => {
-    return Promise.resolve('this is canada');
+    return Promise.resolve(generate(`Describe ${country}:`) + "...");
 }
 
 export const getCities = async (country) => {
-    return Promise.resolve(['Toronto', 'Waterloo', 'Vancouver']);
+    let citiesRaw = generate(`List the 3 most popular cities in ${country}:`);
+    
+    // Remove newlines and numbers
+    citiesRaw = citiesRaw.replace("\n1.", "");
+    citiesRaw = citiesRaw.replace("\n2.", "");
+    citiesRaw = citiesRaw.replace("\n3.", "");
+
+    // Split by spaces
+    popularCities = citiesRaw.split(" ");
+    popularCities.shift(); // shift by 1 index (because first is empty)
+
+    return Promise.resolve(popularCities);
 }
 
 export const getCityDescriptions = async (cities) => {
@@ -24,16 +27,27 @@ export const getCityDescriptions = async (cities) => {
 
 // populateNodesFromCity
 export const getCityDescription = async (city) => {
-    return Promise.resolve(`This is description for ${city}`);
+    return Promise.resolve(generate(`Describe ${city}:`) + "...");
 }
 
 export const getTypes = async (city) => {
-    return Promise.resolve(['Zoo', 'Restaurant', 'Hotel']);
+    return Promise.resolve(['Hotels', 'Shopping Malls', 'Restaurants']);
 }
 
 // populateNodesFromType
-export const getDestinations = async (type) => {
-    return Promise.resolve(['COPS Donut', 'Chipotle', 'PAI']);
+export const getDestinations = async (type, city, country) => {
+    let destinationsRaw = generate(`List the 3 most popular ${type} in ${city}, ${country}:`);
+    
+    // Remove newlines and numbers
+    destinationsRaw = destinationsRaw.replace("\n1.", "");
+    destinationsRaw = destinationsRaw.replace("\n2.", "");
+    destinationsRaw = destinationsRaw.replace("\n3.", "");
+
+    // Split by spaces
+    popularDestinations = destinationsRaw.split(" ");
+    popularDestinations.shift(); // shift by 1 index (because first is empty)
+    
+    return Promise.resolve(popularDestinations);
 }
 
 export const getDestinationDescriptions = async (destinations) => {
@@ -43,5 +57,5 @@ export const getDestinationDescriptions = async (destinations) => {
 }
 
 export const getDestinationDescription = async (destination) => {
-    return Promise.resolve('destination description was gotten here you go');
+    return Promise.resolve(generate(`Describe ${destination}:`) + "...");
 }
