@@ -17,8 +17,6 @@ const useStyles = makeStyles({
 })
 
 export const Demo = () => {
-    console.log('in demo');
-
     const classes = useStyles();
 
     return (

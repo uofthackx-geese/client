@@ -1,0 +1,56 @@
+    .liBox {
+        background-color: #89CFF0;
+        width: fit-content;
+        padding: 20px;
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        margin-bottom: 20px;
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        cursor: pointer;
+        transition: 0.5s;
+        max-width: 80%;
+        overflow: auto;
+        word-break: break-all;
+    }
+
+    .liBox:hover {
+        font-size: 2rem;
+    }
+
+    #liCross {
+        margin-top: 4px;
+    }
+
+    #liCross:hover {
+        color: red;
+    }
+
+    #TPcountry {
+        font-weight: bold;
+        font-size: 2rem;
+    }
+
+    #TPsubbody {
+        margin-top: 50px;
+        margin-left: 3%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .TPcity {
+        font-weight: bold;
+        font-size: 1.5rem;
+        width: fit-content;
+        padding: 10px;
+        transition: 0.5s;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .TPcity:hover {
+        background-color: #89CFF0;
+        border: gray solid 0.5px;
+    }
