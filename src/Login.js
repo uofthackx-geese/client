@@ -7,33 +7,40 @@ const useStyles = makeStyles({
         justifyContent: 'center',
     },
     innerThing: {
-        paddingLeft: '20px',
         width: '100%',
         height: '900px',
-        backgroundColor: 'black',
+        backgroundColor: 'lightblue',
     },
     mySpan: {
-        color: 'white',
+        color: 'black',
     },
     head1: {
-        color: 'white',
-        width: '500px',
+        color: 'black',
+        width: '100%',
         justifyContent: 'center',
+        textAlign: 'center'
     },
     head2: {
-        color: 'white',
+        color: 'black',
+        textAlign: 'center'
     },
     label: {
-        color: 'white',
+        color: 'black',
         justifyContent: 'center',
     },
     btn: {
         width: '60px',
         height: '30px',
         fontWeight: 'bold',
-        backgroundColor: 'lightcoral',
+        color: 'black',
+        backgroundColor: 'pink',
         fontSize: '20px',
     },
+    signin: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '8em',
+    }
 })
 
 export const Login = () => {
@@ -50,7 +57,7 @@ export const Login = () => {
 
                 <h2 className={classes.head2}>Login</h2>
 
-                <form>
+                <form className={classes.signin}>
                     <label className={classes.label} for="username">Username: </label>
                     <input type="text" id="username"></input>
 

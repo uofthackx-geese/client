@@ -1,39 +1,56 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
+import { fabClasses } from '@mui/material'
 
 const useStyles = makeStyles({
     container: {
         display: 'flex',
         justifyContent: 'center',
     },
+    header: {
+        justifyContent: 'center',
+        backgroundColor: 'black',
+        height: '100px',
+    },
     innerThing: {
-        paddingLeft: '20px',
         width: '100%',
         height: '900px',
-        backgroundColor: 'black',
+        backgroundColor: 'lightblue',
     },
     mySpan: {
-        color: 'white',
+        color: 'black',
     },
     head1: {
-        color: 'white',
-        width: '500px',
+        color: 'darkblue',
+        textAlign: 'center',
         justifyContent: 'center',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     head2: {
-        color: 'white',
+        color: 'black',
     },
     label: {
-        color: 'white',
+        color: 'black',
         justifyContent: 'center',
     },
     btn: {
         width: '60px',
         height: '30px',
         fontWeight: 'bold',
-        backgroundColor: 'lightcoral',
+        backgroundColor: 'darkblue',
         fontSize: '20px',
     },
+    orderedlist: {
+        listStyle: 'decimal',
+        fontSize: '20px',
+        fontWeight: 'bold',
+        marginLeft: '565px',
+        marginRight: 'auto',
+    },
+    li: {
+        margin: '10px',
+    }
 })
 
 export const TravelPlan = () => {
@@ -49,7 +66,7 @@ export const TravelPlan = () => {
 
                 <br></br>
 
-                {arr.map(item => <div className={classes.head1} > {item}</div>)}
+                <ol className={classes.orderedlist}>{arr.map(item => <div><li className={classes.li}>{item}</li></div>)}</ol>
             </div>
         </div >
     )
