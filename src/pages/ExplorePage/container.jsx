@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Loader } from '../../components/Loader';
 import { ExplorePagePresentation } from './presentation';
-import { getCountryDescription, getCities, getCityDescriptions } from './api';
+import { 
+    getCountryDescription, 
+    getCities, 
+    getCityDescriptions, 
+    getCityDescription, 
+    getTypes,
+    getDestinations, 
+    getDestinationDescriptions
+} from './api';
 
 export const ExplorePageContainer = () => {
     // useFetch hook, may need a subcomponent to call useFetch on prop = current node??
@@ -18,9 +26,51 @@ export const ExplorePageContainer = () => {
     // temporary until we actually call the APIs
     useEffect(() => {
         if (type) { // Next nodes are destinations
+            const populateNodesFromType = async () => {
+                const destinations = await getDestinations(type);
+                setOriginNodeInfo({
+                    title: type,
+                });
 
+                const descriptions = await getDestinationDescriptions(destinations);
+                setFirstNodeInfo({
+                    title: destinations[0],
+                    description: descriptions[0],
+                })
+                setSecondNodeInfo({
+                    title: destinations[1],
+                    description: descriptions[1],
+                })
+                setThirdNodeInfo({
+                    title: destinations[2],
+                    description: descriptions[2],
+                })
+            }
+            populateNodesFromType();
         } else if (city) { // Next nodes are destination categories
+            const populateNodesFromCity = async () => {
+                let cityDescription = '';
+                let types = [];
 
+                Promise.all([await getCityDescription(city), await getTypes(city)])
+                .then((values) => {
+                    [cityDescription, types] = values;
+                    setOriginNodeInfo({
+                        title: city,
+                        description: cityDescription,
+                    });
+                    setFirstNodeInfo({
+                        title: types[0],
+                    })
+                    setSecondNodeInfo({
+                        title: types[1],
+                    })
+                    setThirdNodeInfo({
+                        title: types[2],
+                    })
+                });
+            }
+            populateNodesFromCity();
         } else { // Next nodes are cities
             const populateNodesFromCountry = async () => {
                 let countryDescription = '';
@@ -34,9 +84,7 @@ export const ExplorePageContainer = () => {
                         description: countryDescription,
                     });
                 });
-                console.log('part 1')
                 const descriptions = await getCityDescriptions(cities);
-                console.log('part2')
                 setFirstNodeInfo({
                     title: cities[0],
                     description: descriptions[0],
