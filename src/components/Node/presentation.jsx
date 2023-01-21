@@ -12,6 +12,7 @@ const useStyles = makeStyles({
         width: '200px',
         height: '100px',
         position: 'absolute',
+        cursor: 'pointer',
     },
     originNode: {
         left: '50%',
@@ -43,15 +44,18 @@ const useStyles = makeStyles({
 export const NodePresentation = ({
     title,
     description,
+    handleTravelClick,
     type, // One of originNode, firstNode, secondNode, thirdNode
     isAbleToAddToTrip,
     handleAddToTrip,
 }) => {
     const classes = useStyles();
 
+    const handleClick = handleTravelClick ? () => handleTravelClick(title) : () => {}
+
     return (
-        <DescriptionTooltip title={title} description={description}>
-            <Box className={`${classes.nodeContainer} ${classes[type]}`}>
+        <DescriptionTooltip title={title} description={description || ''}>
+            <Box className={`${classes.nodeContainer} ${classes[type]}`} onClick={handleClick}>
                 <div className={classes.nodeContent}>
                     {title}
                 </div>

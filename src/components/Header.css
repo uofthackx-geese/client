@@ -25,3 +25,11 @@
     #header-button:active {
         background-color: whitesmoke;
     }
+
+    #header-title {
+        text-align: center;
+        color: darkblue;
+        font-size: 150%;
+        font-weight: bold;
+        margin-left: -20px;
+    }
