@@ -47,13 +47,14 @@ export const NodePresentation = ({
     type, // One of originNode, firstNode, secondNode, thirdNode
     isAbleToAddToTrip,
     handleAddToTrip,
+    opacity
 }) => {
     const classes = useStyles();
 
     const handleClick = handleTravelClick ? () => handleTravelClick(title) : () => {}
 
     return (
-        <DescriptionTooltip title={title} description={description || ''}>
+        <DescriptionTooltip title={title} description={description || ''} opacity={opacity}>
             <Box className={`${classes.nodeContainer} ${classes[type]}`} onClick={handleClick}>
                 <div className={classes.nodeContent}>
                     {title}
