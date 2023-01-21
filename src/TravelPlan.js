@@ -21,6 +21,7 @@ const useStyles = makeStyles({
         minHeight: '900px',
         height: '100%',
         backgroundColor: 'lightblue',
+        overflowX: 'hidden',
         paddingLeft: '5%'
     },
     mySpan: {
@@ -54,7 +55,7 @@ const useStyles = makeStyles({
 })
 
 export const TravelPlan = () => {
-    const arr = ['Ontario Science Centre', 'CN Tower', 'Royal Ontario Museumdedewddewefwfweedewddewefwfweedewddewefwfwe']
+    const arr = ['Ontario Science Centre', 'CN Tower', 'Royal Ontario Gallery']
     const [isShowDialog, setIsShowDialog] = useState(false)
     const [payload, setPayload] = useState(null)
 
@@ -65,7 +66,7 @@ export const TravelPlan = () => {
             <div className={classes.container}>
                 <div className={classes.innerThing}>
                     <div style={{height: '100px'}}></div>
-                    <div id='TPcountry'>Canada</div>
+                    <div id='TPcountry'><label>Canada</label></div>
                     <div id='TPsubbody'>
                         <div>
                             <div className='TPcity' onClick={() => {setIsShowDialog(true); setPayload({title: "Toronto", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut erat in mi blandit ultricies. Curabitur vulputate, justo id porttitor tincidunt, dolor orci egestas erat, non blandit tellus mauris ut risus. Vestibulum ut cursus nisi, sed aliquam magna. Phasellus vel varius turpis, non malesuada velit. Suspendisse accumsan tellus vel ex sodales."});}}>Toronto</div>
