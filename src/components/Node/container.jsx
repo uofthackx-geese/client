@@ -5,6 +5,7 @@ import { NodePresentation } from './presentation'
 export const NodeContainer = ({
     title,
     description,
+    type,
     isAbleToAddToTrip,
 }) => {
     // TODO: either require caching for this state to persist or access DB to check if already added to Trip.
@@ -18,6 +19,7 @@ export const NodeContainer = ({
         <NodePresentation 
             title={title} 
             description={description} 
+            type={type}
             isAbleToAddToTrip={isAbleToAddToTrip}
             handleAddToTrip={handleAddToTrip}
         />
