@@ -7,7 +7,7 @@ export const Header = ({ title, pathTo }) => {
         <div id='header-parent'>
             <div style={{fontSize: '200%', fontWeight: 'bold', fontFamily: 'monospace'}}>TripTailor</div>
             <div id='header-title'>{title}</div>
-            {pathTo && <div><button id='header-button' onClick={() => navigate(pathTo)}>{title}</button></div>}
+            {pathTo && <div><button id='header-button' onClick={() => navigate(pathTo)}>{title.toUpperCase()}</button></div>}
         </div>
     )
 }

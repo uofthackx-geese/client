@@ -33,7 +33,7 @@ export const getCityDescription = async (city) => {
 }
 
 export const getTypes = async (city) => {
-    return ['hotel', 'shopping mall', 'restaurant'];
+    return ['Hotels', 'Shopping Malls', 'Restaurant'];
 }
 
 // populateNodesFromType
@@ -66,21 +66,22 @@ export const getDestinationDescription = async (destination) => {
 }
 
 // Server API calls
-export async function addDestination(title, type, country, city, desc, user_id) {
+export async function addDestination(title, type, country, city, description, user_id) {
+    const lowercaseSingularType = type.toLowerCase().substring(0, type.toString());
+    console.log('addDestination', type, lowercaseSingularType);
+
     const data = {
         "title": title,
-        "type": type,
+        "type": lowercaseSingularType,
         "country": country,
         "city": city,
-        "description": desc,
+        "description": description,
         "user_id": user_id
     }
 
     const response = await fetch(`http://127.0.0.1:8080/api/add_destination`, {
         method: 'POST',
         headers: {
-            'Access-Control-Allow-Headers': '*', // this will allow all CORS requests
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET', // this states the allowed methods
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
