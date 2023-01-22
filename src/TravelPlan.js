@@ -232,7 +232,7 @@ export const TravelPlan = () => {
                     </div>
                 </div>
             </div>
-            <Header page="EXPLORE"/>
+            <Header title='Explore' pathTo='/explore'/>
             <DialogTP isVisible={isShowDialog} setIsVisible={setIsShowDialog} payload={payload} deleteDestination={deleteDestination}/>
         </>
     )

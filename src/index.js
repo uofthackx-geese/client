@@ -6,7 +6,6 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
-import { Demo } from './Demo'
 import { LoginPage } from './pages/LoginPage';
 import { TripPage } from './pages/TripPage';
 import { ExplorePage } from './pages/ExplorePage';
@@ -19,15 +18,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Navigate to='/login' replace />
   },
-  // Actual paths:
   {
     path: "/login",
-    element: <Login />  // LoginPage
+    element: <Login /> 
   },
-  // {
-  //   path: "/trip",
-  //   element: <TripPage />
-  // },
   {
     path: "/travelplan",
     element: <TravelPlan />
