@@ -52,7 +52,7 @@ export const NodePresentation = ({
     handleTravelClick,
     isTerminal,
     type, // One of originNode, firstNode, secondNode, thirdNode
-    handleAddDestination,
+    handleAddDestination
 }) => {
     const classes = useStyles();
 
@@ -64,7 +64,7 @@ export const NodePresentation = ({
                 <div className={classes.nodeContent}>
                     {title}
                 </div>
-                {isTerminal && <div><BsFillPlusSquareFill className='plus-icon'/></div>}
+                {isTerminal && <div><BsFillPlusSquareFill className='plus-icon' onClick={() => handleAddDestination(title, description)}/></div>}
             </Box>
         </DescriptionTooltip>
     )
