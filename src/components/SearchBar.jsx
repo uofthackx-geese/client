@@ -19,6 +19,7 @@ export const SearchBar = ({ maxWidth = '280px', autoFocus = false, width = '256p
     }
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
+            restartTP()
             doSearch()
         }
     }
