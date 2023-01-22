@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
+import { Countries } from './Countries';
 
 const useStyles = makeStyles({
     container: {
@@ -69,6 +70,8 @@ export const Login = () => {
                     </form>
                 </div>
             </div>
+
+            <Countries />
         </div>
     )
 }
