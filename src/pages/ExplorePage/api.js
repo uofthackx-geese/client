@@ -1,17 +1,19 @@
 import { generate } from "./Cohere.js"
 
 const stripNewlines = (str) => {
-    str.replace(/\r?\n|\r/, "");
+    return str.replace(/\r?\n|\r/, "");
 }
 
 // populateNodesFromCountry
 export const getCountryDescription = async (country) => {
-    return await generate(`Describe ${country}:`) + "...";
+    const rawDescription = await generate(`Describe ${country}:`) + "...";
+    const strippedDescription = stripNewlines(rawDescription);
+    return strippedDescription;
 }
 
 export const getCities = async (country) => {
     let citiesRaw = await generate(`List the 3 most popular cities in ${country}:`);
-    stripNewlines(citiesRaw);
+    citiesRaw = stripNewlines(citiesRaw);
 
     // Split string by commas (and whitespace)
     let popularCities = citiesRaw.split(/,\s*/);
@@ -29,7 +31,9 @@ export const getCityDescriptions = async (cities) => {
 
 // populateNodesFromCity
 export const getCityDescription = async (city) => {
-    return await generate(`Describe ${city}:`) + "...";
+    const rawDescription = await generate(`Describe ${city}:`) + "...";
+    const strippedDescription = stripNewlines(rawDescription);
+    return strippedDescription;
 }
 
 export const getTypes = async (city) => {
@@ -45,7 +49,7 @@ export const getDestinations = async (type, city, country) => {
     destinationsRaw = destinationsRaw.replace("\n2.", ", ");
     destinationsRaw = destinationsRaw.replace("\n3.", ", ");
 
-    stripNewlines(destinationsRaw);
+    destinationsRaw = stripNewlines(destinationsRaw);
 
     // Split by spaces
     let popularDestinations = destinationsRaw.split(/,\s*/);
@@ -62,13 +66,14 @@ export const getDestinationDescriptions = async (destinations) => {
 }
 
 export const getDestinationDescription = async (destination) => {
-    return await generate(`Describe ${destination}:`) + "...";
+    const rawDescription = await generate(`Describe ${destination}:`) + "...";
+    const strippedDescription = stripNewlines(rawDescription);
+    return strippedDescription;
 }
 
 // Server API calls
 export async function addDestination(title, type, country, city, description, user_id) {
-    const lowercaseSingularType = type.toLowerCase().substring(0, type.toString());
-    console.log('addDestination', type, lowercaseSingularType);
+    const lowercaseSingularType = type.toLowerCase().substring(0, type.length - 1);
 
     const data = {
         "title": title,
