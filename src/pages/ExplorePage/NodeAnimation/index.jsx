@@ -26,7 +26,7 @@ export const NodeAnimation = ({ duration, inProp, children }) => {
         exited:  { 
             opacity: 0, 
             transition: `opacity ${duration}ms ease-in-out`,
-            pointerEvents: 'auto',
+            pointerEvents: 'none',
         },
     };
     const nodeRef = useRef(null);

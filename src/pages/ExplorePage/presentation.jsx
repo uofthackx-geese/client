@@ -35,6 +35,7 @@ const useStyles = makeStyles({
         top: '90%',
         color: 'white',
         fontSize: '32px',
+        cursor: 'pointer',
     },
 })
 
