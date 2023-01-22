@@ -1,5 +1,5 @@
 import { Node } from '../../components/Node';
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import { makeStyles } from '@mui/styles'
 import Header from '../../components/Header'
 import { ReactComponent as FirstArrow } from './arrow1.svg';
@@ -14,6 +14,7 @@ const useStyles = makeStyles({
         width: '100vw',
         height: '100vh',
         backgroundColor: 'black',
+        position: 'relative',
     },
     arrow1: {
         position: 'absolute',
@@ -36,6 +37,11 @@ const useStyles = makeStyles({
         color: 'white',
         fontSize: '32px',
         cursor: 'pointer',
+    },
+    loader: {
+        position: 'absolute',
+        bottom: '15px',
+        right: '15px',
     },
 })
 
@@ -105,8 +111,10 @@ export const ExplorePagePresentation = ({
                 </NodeAnimation>
 
                 <Header headerTitle='Explore' buttonLabel='Travel Plan' buttonPathTo='/travelplan'/>
+                {!inProp && <Box class={classes.loader}>
+                    <CircularProgress />
+                </Box>}
             </Box>
-
         </>
     )
 }
