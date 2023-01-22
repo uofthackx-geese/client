@@ -65,7 +65,7 @@ export async function addDestination(title, type, country, city, desc, user_id) 
         "type": type,
         "country": country,
         "city": city,
-        "desc": desc,
+        "description": desc,
         "user_id": user_id
     }
 
