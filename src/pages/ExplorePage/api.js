@@ -54,7 +54,7 @@ export const getCityDescription = async (city, country) => {
 }
 
 export const getTypes = async (city) => {
-    return ['Hotels', 'Shopping Malls', 'Restaurant'];
+    return ['Hotels', 'Shopping Malls', 'Restaurants'];
 }
 
 // populateNodesFromType

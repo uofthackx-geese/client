@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Grid, IconButton, TextField, Box } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
+import { restartTP } from "../pages/ExplorePage/api";
 
 export const SearchBar = ({ maxWidth = '280px', autoFocus = false, width = '256px', defaultText, }) => {
     const navigate = useNavigate();
@@ -13,6 +14,7 @@ export const SearchBar = ({ maxWidth = '280px', autoFocus = false, width = '256p
         }
     }
     const handleClick = () => {
+        restartTP()
         doSearch()
     }
     const handleKeyPress = (event) => {

@@ -10,7 +10,7 @@ export const Header = ({ headerTitle, buttonLabel, buttonPathTo }) => {
 
     return (
         <div id='header-parent'>
-            <div style={{fontSize: '200%', fontWeight: 'bold', fontFamily: 'monospace'}} onClick={goToHome}>TripTailor</div>
+            <div style={{fontSize: '200%', fontWeight: 'bold', fontFamily: 'monospace', cursor: 'pointer'}} onClick={goToHome}>TripTailor</div>
             <div id='header-title'>{headerTitle}</div>
             {buttonPathTo && <div><button id='header-button' onClick={() => navigate(buttonPathTo)}>{buttonLabel.toUpperCase()}</button></div>}
         </div>

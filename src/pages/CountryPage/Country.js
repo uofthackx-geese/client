@@ -4,6 +4,7 @@ import Header from '../../components/Header'
 import { SearchBar } from '../../components/SearchBar';
 import { Box, Button, Typography } from '@mui/material'
 import { useNavigate } from "react-router-dom";
+import { restartTP } from '../ExplorePage/api';
 
 const useStyles = makeStyles({
     container: {
@@ -41,6 +42,7 @@ export const CountryPage = () => {
     const navigate = useNavigate();
 
     const handleLuckyFeeling = () => {
+        restartTP()
         const randomLuckyCountry = getRandomFromArray(luckyCountryPool);
         navigate(`/explore/${randomLuckyCountry}`);
     }
