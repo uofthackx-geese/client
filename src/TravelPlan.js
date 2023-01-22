@@ -55,7 +55,7 @@ const useStyles = makeStyles({
 })
 
 export const TravelPlan = () => {
-    const [travelPlan, setTravelPlan] = useState({
+    /*const [travelPlan, setTravelPlan] = useState({
         country: 'Canada',
         response: [
             {
@@ -119,7 +119,7 @@ export const TravelPlan = () => {
                 ]
             }
         ]
-    })
+    })*/
     const [isShowDialog, setIsShowDialog] = useState(false)
     const [payload, setPayload] = useState(null)
 
@@ -133,6 +133,81 @@ export const TravelPlan = () => {
             }
         }
     }
+
+    const test = [
+        [
+            4,
+            "Great Wall of China",
+            "hotel",
+            "China",
+            "Beijing",
+            "its a hotel"
+        ],
+        [
+            5,
+            "Canada's Wonderland",
+            "shopping mall",
+            "Canada",
+            "Toronto",
+            "its a hotel"
+        ],
+        
+        [
+            6,
+            "Cool Land",
+            "hotel",
+            "Canada",
+            "Toronto",
+            "its a hotel"
+        ],
+        [
+            7,
+            "COOL WALL", // title
+            "restaurant", // type
+            "China", // country
+            "Beijing", // city
+            "its a hotel" // description
+        ]
+    ]
+
+    const buildStructure = () => {
+        let newTemp = []
+        let temp = test.map(dest => {
+            let exists = false
+            for (let i = 0; i < newTemp.length; ++i) {
+                if (dest[4] == newTemp[i].city) {
+                    exists = true
+                    break
+                }
+            }
+            if (!exists) {
+                newTemp.push({city: dest[4], places: []})
+            }
+            return ({
+                dest_id: dest[0],
+                title: dest[1],
+                type: dest[2],
+                country: dest[3],
+                city: dest[4],
+                description: dest[5]
+            })
+        })
+        for (let i = 0; i < newTemp.length; ++i) {
+            for (let j = 0; j < temp.length; ++j) {
+                if (temp[j].city === newTemp[i].city) {
+                    newTemp[i].places.push({
+                        title: temp[j].title,
+                        type: temp[j].type,
+                        description: temp[j].description
+                    })
+                }
+            }
+        }
+
+        return {country: 'Canada', response: newTemp}
+    }
+
+    const [travelPlan, setTravelPlan] = useState(buildStructure())
 
     const classes = useStyles();
 
@@ -148,7 +223,7 @@ export const TravelPlan = () => {
                             return (
                                 <div>
                                     <div className='TPcity' onClick={() => {setIsShowDialog(true); setPayload({title: body.city, description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut erat in mi blandit ultricies. Curabitur vulputate, justo id porttitor tincidunt, dolor orci egestas erat, non blandit tellus mauris ut risus. Vestibulum ut cursus nisi, sed aliquam magna. Phasellus vel varius turpis, non malesuada velit. Suspendisse accumsan tellus vel ex sodales."});}}>{body.city}</div>
-                                    <ol className={classes.orderedlist}>{body?.places?.map((item, index) => <div className='liBox' onClick={() => {setIsShowDialog(true); setPayload({city: body.city, title: item.title, description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut erat in mi blandit ultricies. Curabitur vulputate, justo id porttitor tincidunt, dolor orci egestas erat, non blandit tellus mauris ut risus. Vestibulum ut cursus nisi, sed aliquam magna. Phasellus vel varius turpis, non malesuada velit. Suspendisse accumsan tellus vel ex sodales."});}}><div className={classes.liIndex}>{index + 1}</div> <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item.title}</div> <div><TypeChip type={item.type}/></div></div>)}</ol>
+                                    <ol className={classes.orderedlist}>{body?.places?.map((item, index) => <div className='liBox' onClick={() => {setIsShowDialog(true); setPayload({city: body.city, title: item.title, description: item.description });}}><div className={classes.liIndex}>{index + 1}</div> <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item.title}</div> <div><TypeChip type={item.type}/></div></div>)}</ol>
                                 </div>
                             )
                            }
