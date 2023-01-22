@@ -24,7 +24,7 @@ export const ExplorePageContainer = () => {
     useEffect(() => {
         if (type) { // Next nodes are destinations
             const populateNodesFromType = async () => {
-                const destinations = await getDestinations(type);
+                const destinations = await getDestinations(type, city, country);
                 setOriginNodeInfo({
                     title: type,
                 });
@@ -49,41 +49,29 @@ export const ExplorePageContainer = () => {
             populateNodesFromType();
         } else if (city) { // Next nodes are destination categories
             const populateNodesFromCity = async () => {
-                let cityDescription = '';
-                let types = [];
-
-                Promise.all([await getCityDescription(city), await getTypes(city)])
-                    .then((values) => {
-                        [cityDescription, types] = values;
-                        setOriginNodeInfo({
-                            title: city,
-                            description: cityDescription,
-                        });
-                        setFirstNodeInfo({
-                            title: types[0],
-                        })
-                        setSecondNodeInfo({
-                            title: types[1],
-                        })
-                        setThirdNodeInfo({
-                            title: types[2],
-                        })
-                    });
+                const [cityDescription, types] = await Promise.all([ getCityDescription(city), getTypes(city)])
+                setOriginNodeInfo({
+                    title: city,
+                    description: cityDescription,
+                });
+                setFirstNodeInfo({
+                    title: types[0],
+                })
+                setSecondNodeInfo({
+                    title: types[1],
+                })
+                setThirdNodeInfo({
+                    title: types[2],
+                })
             }
             populateNodesFromCity();
         } else { // Next nodes are cities
             const populateNodesFromCountry = async () => {
-                let countryDescription = '';
-                let cities = [];
-
-                Promise.all([await getCountryDescription(country), await getCities(country)])
-                    .then((values) => {
-                        [countryDescription, cities] = values;
-                        setOriginNodeInfo({
-                            title: country,
-                            description: countryDescription,
-                        });
-                    });
+                const [countryDescription, cities] = await Promise.all([getCountryDescription(country), getCities(country)]);
+                setOriginNodeInfo({
+                    title: country,
+                    description: countryDescription,
+                });
                 const descriptions = await getCityDescriptions(cities);
                 setFirstNodeInfo({
                     title: cities[0],
