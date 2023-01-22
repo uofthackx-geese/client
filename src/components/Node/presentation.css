@@ -1,0 +1,15 @@
+ .plus-icon {
+    font-size: 2rem;
+    background-color: white;
+    color: black;
+    margin-bottom: 10px;
+    border: white 1px solid;
+    border-radius: 10px;
+    transition: 0.5s;
+ }
+
+ .plus-icon:hover {
+    background-color: black;
+    color: white;
+    border: black 1px solid;
+ }

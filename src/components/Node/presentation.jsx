@@ -2,6 +2,8 @@ import React from 'react'
 import { makeStyles } from '@mui/styles'
 import { Box } from '@mui/material'
 import { DescriptionTooltip } from '../DescriptionTooltip/DescriptionTooltip'
+import {BsFillPlusSquareFill} from 'react-icons/bs'
+import './presentation.css'
 
 const useStyles = makeStyles({
     nodeContainer: {
@@ -13,6 +15,9 @@ const useStyles = makeStyles({
         height: '100px',
         position: 'absolute',
         cursor: 'pointer',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     originNode: {
         left: '50%',
@@ -45,6 +50,7 @@ export const NodePresentation = ({
     title,
     description,
     handleTravelClick,
+    isTerminal,
     type, // One of originNode, firstNode, secondNode, thirdNode
     isAbleToAddToTrip,
     handleAddToTrip,
@@ -59,6 +65,7 @@ export const NodePresentation = ({
                 <div className={classes.nodeContent}>
                     {title}
                 </div>
+                {isTerminal && <div><BsFillPlusSquareFill className='plus-icon'/></div>}
             </Box>
         </DescriptionTooltip>
     )

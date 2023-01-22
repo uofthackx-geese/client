@@ -22,6 +22,7 @@ export const NodeContainer = ({
             description={description} 
             handleTravelClick={isTerminal ? () => {} : handleTravelClick}
             type={type}
+            isTerminal={isTerminal}
             // isAbleToAddToTrip={isAbleToAddToTrip}
             // handleAddToTrip={handleAddToTrip}
         />
