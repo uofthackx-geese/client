@@ -92,7 +92,7 @@ export const ExplorePagePresentation = ({
                     />
                 </NodeAnimation>
 
-            <Header title='Travel Plan' pathTo='/travelplan'/>
+                <Header headerTitle='Explore' buttonLabel='Travel Plan' buttonPathTo='/travelplan'/>
             </Box>
 
         </>

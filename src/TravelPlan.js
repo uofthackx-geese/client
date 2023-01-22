@@ -273,7 +273,7 @@ export const TravelPlan = () => {
                     </div>
                 </div>
             </div>
-            <Header title='Explore' pathTo='/explore'/>
+            <Header headerTitle='Travel Plan' buttonLabel='EXPLORE' buttonPathTo='/chooseCountry'/>
             <DialogTP isVisible={isShowDialog} setIsVisible={setIsShowDialog} payload={payload} handleDeleteDestination={handleDeleteDestination}/>
         </>
     )

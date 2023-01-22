@@ -1,75 +1,62 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
+import Header from '../../components/Header'
+import { SearchBar } from '../../components/SearchBar';
+import { Box, Button, Typography } from '@mui/material'
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
     container: {
+        height: '100vh',
+        width: '100vw',
         display: 'flex',
-        justifyContent: 'center',
-    },
-    innerThing: {
-        width: '100%',
-        height: '800px',
         backgroundColor: 'black',
-    },
-    content: {
-        marginTop: '15%',
-    },
-    head1: {
-        color: 'rgb(12, 155, 198)',
-        width: '100%',
-        justifyContent: 'center',
-        textAlign: 'center'
-    },
-    head2: {
-        color: 'white',
-        width: '100%',
-        textAlign: 'center'
-    },
-    btn: {
-        width: '120px',
-        height: '60px',
-        fontWeight: 'bold',
-        color: 'black',
-        backgroundColor: 'lightblue',
-        borderRadius: '25px',
-        fontSize: '40px',
-    },
-    signin: {
-        display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    input: {
-        fontSize: '24px',
-    }
+    content: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: '56px',
+    },
+    head1: {
+        color: 'rgb(12, 155, 198)',
+        fontWeight: 'bold', 
+        fontFamily: 'monospace',
+        marginBottom: '24px',
+    },
 })
+
+const luckyCountryPool = ['France', 'Spain', 'United States', 'China', 'Italy', 'Turkey', 'Mexico', 'Thailand', 'Germany', 'United Kingdom'];
+
+const getRandomFromArray = (arr) => {
+    return arr[Math.floor(Math.random()*arr.length)];
+}
 
 export const CountryPage = () => {
     const classes = useStyles();
 
+    const navigate = useNavigate();
+
+    const handleLuckyFeeling = () => {
+        const randomLuckyCountry = getRandomFromArray(luckyCountryPool);
+        navigate(`/country/${randomLuckyCountry}`);
+    }
+
     return (
-        <div className={classes.container}>
-            <div className={classes.innerThing}>
-                <div className={classes.content}>
-                    <h1 className={classes.head1}>Enter Country of Interest!</h1>
-
-                    <br></br>
-
-                    <div>
-                        <form className={classes.signin}>
-                            <input className={classes.input} type="text" id="username" size="25" placeholder="Enter country here!"></input>
-
-                            <br></br>
-
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <button className={classes.btn}>Go!</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <>
+            <Box className={classes.container}>
+                <Box className={classes.content}>
+                    <Typography variant='h1' className={classes.head1}>TripTailor</Typography>
+                    <Box sx={{marginBottom: '8px'}}>
+                        <SearchBar defaultText='Enter a country...'/>
+                    </Box>
+                    <Button variant='outlined' onClick={handleLuckyFeeling}>I'm Feeling Lucky</Button>
+                </Box>
+            </Box>
+            <Header headerTitle='Explore' buttonLabel='Travel Plan' buttonPathTo='/travelplan'/>
+        </>
     )
 }
