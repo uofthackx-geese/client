@@ -13,3 +13,8 @@
     color: white;
     border: black 1px solid;
  }
+
+ .done-icon {
+   margin-bottom: 10px;
+   border-radius: 50%;
+ }

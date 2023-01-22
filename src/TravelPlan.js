@@ -179,9 +179,8 @@ export const TravelPlan = () => {
 
     const buildStructure = async () => {
         let newTemp = []
-        let check = await handleGetAllDestinations(6)
-        console.log(check)
-        let temp = check.response.map(dest => {
+        let response_data = await handleGetAllDestinations(6)
+        let temp = response_data.response.map(dest => {
             let exists = false
             for (let i = 0; i < newTemp.length; ++i) {
                 if (dest[4] == newTemp[i].city) {
