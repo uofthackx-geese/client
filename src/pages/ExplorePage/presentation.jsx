@@ -71,9 +71,6 @@ export const ExplorePagePresentation = ({
                     />
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} duration={500}>
-                    <Box sx={{pointerEvents: 'none'}}>
-                        <FirstArrow className={classes.arrow1} />
-                    </Box>
                     <Node 
                         title={firstNodeInfo.title} 
                         description={firstNodeInfo.description} 
@@ -84,9 +81,6 @@ export const ExplorePagePresentation = ({
                     />
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} duration={500}>
-                    <Box sx={{pointerEvents: 'none'}}>
-                        <SecondArrow className={classes.arrow2} />
-                    </Box>
                     <Node 
                         title={secondNodeInfo.title} 
                         description={secondNodeInfo.description} 
@@ -97,9 +91,6 @@ export const ExplorePagePresentation = ({
                     />
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} duration={500}>
-                    <Box sx={{pointerEvents: 'none'}}>
-                        <ThirdArrow className={classes.arrow3} />
-                    </Box>
                     <Node 
                         title={thirdNodeInfo.title} 
                         description={thirdNodeInfo.description} 

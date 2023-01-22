@@ -100,7 +100,7 @@ export async function addDestination(title, type, country, city, description, us
         "user_id": user_id
     }
 
-    const response = await fetch(`http://127.0.0.1:8080/api/add_destination`, {
+    const response = await fetch(`https://triptailor-server.onrender.com/api/add_destination`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -111,7 +111,7 @@ export async function addDestination(title, type, country, city, description, us
 }
 
 export async function getAllData(user_id) {
-    const response = await fetch(`http://127.0.0.1:8080/api/get_all_data?user_id=${user_id}`, {
+    const response = await fetch(`https://triptailor-server.onrender.com/api/get_all_data?user_id=${user_id}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
@@ -119,7 +119,7 @@ export async function getAllData(user_id) {
 }
 
 export async function deleteDestination(dest_id) {
-    const response = await fetch(`http://127.0.0.1:8080/api/delete_destination`, {
+    const response = await fetch(`https://triptailor-server.onrender.com/api/delete_destination`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({dest_id: dest_id})
@@ -128,7 +128,7 @@ export async function deleteDestination(dest_id) {
 }
 
 export async function restartTP() {
-    const response = await fetch(`http://127.0.0.1:8080/api/restart_TP`, {
+    const response = await fetch(`https://triptailor-server.onrender.com/api/restart_TP`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     })
