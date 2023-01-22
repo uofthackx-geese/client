@@ -4,6 +4,7 @@ import Header from './components/Header'
 import './TravelPlan.css'
 import TypeChip from './components/TypeChip'
 import DialogTP from './components/DialogTP'
+import { getAllData } from './pages/ExplorePage/api'
 
 const useStyles = makeStyles({
     container: {
@@ -121,6 +122,13 @@ export const TravelPlan = () => {
     })*/
     const [isShowDialog, setIsShowDialog] = useState(false)
     const [payload, setPayload] = useState(null)
+    const [travelPlan, setTravelPlan] = useState(null)
+
+    const handleGetAllDestinations = async (user_id) => {
+        const response =  await getAllData(user_id)
+        return response
+    }
+
 
     const deleteDestination = (city, destinationTitle) => {
         let tempPlan = {...travelPlan}
@@ -169,9 +177,11 @@ export const TravelPlan = () => {
         ]
     ]
 
-    const buildStructure = () => {
+    const buildStructure = async () => {
         let newTemp = []
-        let temp = test.map(dest => {
+        let check = await handleGetAllDestinations(6)
+        console.log(check)
+        let temp = check.response.map(dest => {
             let exists = false
             for (let i = 0; i < newTemp.length; ++i) {
                 if (dest[4] == newTemp[i].city) {
@@ -206,7 +216,14 @@ export const TravelPlan = () => {
         return {country: 'Canada', response: newTemp}
     }
 
-    const [travelPlan, setTravelPlan] = useState(buildStructure())
+    useEffect(() => {
+        const getAllDest = async () => {
+            const response_data = await buildStructure()
+            setTravelPlan(response_data)
+        }
+
+        getAllDest()
+    }, [])
 
     const classes = useStyles();
 

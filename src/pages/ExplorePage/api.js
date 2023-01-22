@@ -33,7 +33,7 @@ export const getCityDescription = async (city) => {
 }
 
 export const getTypes = async (city) => {
-    return ['Hotels', 'Shopping Malls', 'Restaurants'];
+    return ['hotel', 'shopping mall', 'restaurant'];
 }
 
 // populateNodesFromType
@@ -90,10 +90,9 @@ export async function addDestination(title, type, country, city, desc, user_id) 
 
 // Server API calls
 export async function getAllData(user_id) {
-    const response = await fetch('http://127.0.0.1:8080/api/get_all_data', {
+    const response = await fetch(`http://127.0.0.1:8080/api/get_all_data?user_id=${user_id}`, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: user_id })
+        headers: { 'Content-Type': 'application/json' }
     })
     return await response.json();
 }
