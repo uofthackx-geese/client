@@ -49,8 +49,8 @@ export const CountryPage = () => {
         <>
             <Box className={classes.container}>
                 <Box className={classes.content}>
-                    <Typography variant='h1' className={classes.head1}>TripTailor</Typography>
-                    <Box sx={{marginBottom: '8px'}}>
+                    <Typography variant='h1' className={classes.head1}><pre>TripTailor</pre></Typography>
+                    <Box sx={{marginBottom: '8px', marginTop: '-80px'}}>
                         <SearchBar defaultText='Enter a country...'/>
                     </Box>
                     <Button variant='outlined' onClick={handleLuckyFeeling}>I'm Feeling Lucky</Button>
