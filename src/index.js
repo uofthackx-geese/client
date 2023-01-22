@@ -10,8 +10,9 @@ import { Demo } from './Demo'
 import { LoginPage } from './pages/LoginPage';
 import { TripPage } from './pages/TripPage';
 import { ExplorePage } from './pages/ExplorePage';
-import { Login } from './Login'
-import { TravelPlan } from './TravelPlan'
+import { Login } from './Login';
+import { TravelPlan } from './TravelPlan';
+import { CountryPage } from './pages/CountryPage/Country';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/explore",
     element: <ExplorePage />
+  },
+  {
+    path: "/chooseCountry",
+    element: <CountryPage />
   },
 ])
 

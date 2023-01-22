@@ -76,3 +76,13 @@ export async function addDestination(title, type, country, city, desc, user_id) 
     })
     return await response.json();
 }
+
+// Server API calls
+export async function getAllData(user_id) {
+    const response = await fetch('http://127.0.0.1:8080/api/get_all_data', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: user_id })
+    })
+    return await response.json();
+}
