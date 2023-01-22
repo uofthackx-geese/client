@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import {
   createBrowserRouter,
   RouterProvider,
+  Navigate,
 } from "react-router-dom";
 import { Demo } from './Demo'
 import { LoginPage } from './pages/LoginPage';
@@ -17,11 +17,7 @@ import { CountryPage } from './pages/CountryPage/Country';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
-  },
-  {
-    path: "/route1",
-    element: <Demo />
+    element: <Navigate to='/login' replace />
   },
   // Actual paths:
   {
