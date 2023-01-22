@@ -1,5 +1,9 @@
 import { generate } from "./Cohere.js"
 
+const stripNewlines = (str) => {
+    str.replace(/\r?\n|\r/, "");
+}
+
 // populateNodesFromCountry
 export const getCountryDescription = async (country) => {
     return await generate(`Describe ${country}:`) + "...";
@@ -7,6 +11,7 @@ export const getCountryDescription = async (country) => {
 
 export const getCities = async (country) => {
     let citiesRaw = await generate(`List the 3 most popular cities in ${country}:`);
+    stripNewlines(citiesRaw);
 
     // Split string by commas (and whitespace)
     let popularCities = citiesRaw.split(/,\s*/);
@@ -39,6 +44,8 @@ export const getDestinations = async (type, city, country) => {
     destinationsRaw = destinationsRaw.replace("\n1.", ", ");
     destinationsRaw = destinationsRaw.replace("\n2.", ", ");
     destinationsRaw = destinationsRaw.replace("\n3.", ", ");
+
+    stripNewlines(destinationsRaw);
 
     // Split by spaces
     let popularDestinations = destinationsRaw.split(/,\s*/);
