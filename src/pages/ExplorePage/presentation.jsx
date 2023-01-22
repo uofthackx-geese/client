@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Node } from '../../components/Node';
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles'
@@ -35,20 +34,14 @@ export const ExplorePagePresentation = ({
     secondNodeInfo,
     thirdNodeInfo,
     handleTravelClick,
+    inProp,
 }) => {
     const classes = useStyles();
-
-    // Used for animation
-    const [inProp, setInProp] = useState(true);
-    const transitionHandleTravelClick = (arg) => {
-        setInProp(!inProp);
-        handleTravelClick(arg);
-    }
 
     return (
         <>
             <Box className={classes.explorePageContainer}>
-                <NodeAnimation inProp={inProp} easeIn={500} easeOut={300}>
+                <NodeAnimation inProp={inProp} duration={300}>
                     <Box sx={{pointerEvents: 'none'}}>
                         <FirstArrow className={classes.arrow1} />
                     </Box>
@@ -58,7 +51,7 @@ export const ExplorePagePresentation = ({
                         type='originNode'
                     />
                 </NodeAnimation>
-                <NodeAnimation inProp={inProp} easeIn={700} easeOut={500}>
+                <NodeAnimation inProp={inProp} duration={500}>
                     <Box sx={{pointerEvents: 'none'}}>
                         <SecondArrow className={classes.arrow2} />
                     </Box>
@@ -66,11 +59,11 @@ export const ExplorePagePresentation = ({
                         title={firstNodeInfo.title} 
                         description={firstNodeInfo.description} 
                         type='firstNode' 
-                        handleTravelClick={transitionHandleTravelClick}
+                        handleTravelClick={handleTravelClick}
                         isTerminal={firstNodeInfo.isTerminal}
                     />
                 </NodeAnimation>
-                <NodeAnimation inProp={inProp} easeIn={700} easeOut={500}>
+                <NodeAnimation inProp={inProp} duration={500}>
                     <Box sx={{pointerEvents: 'none'}}>
                         <ThirdArrow className={classes.arrow3} />
                     </Box>
@@ -78,11 +71,11 @@ export const ExplorePagePresentation = ({
                         title={secondNodeInfo.title} 
                         description={secondNodeInfo.description} 
                         type='secondNode' 
-                        handleTravelClick={transitionHandleTravelClick}
+                        handleTravelClick={handleTravelClick}
                         isTerminal={secondNodeInfo.isTerminal}
                     />
                 </NodeAnimation>
-                <NodeAnimation inProp={inProp} easeIn={700} easeOut={500}>
+                <NodeAnimation inProp={inProp} duration={500}>
                     <Box sx={{pointerEvents: 'none'}}>
                         <FourthArrow className={classes.arrow4} />
                     </Box>
@@ -90,7 +83,7 @@ export const ExplorePagePresentation = ({
                         title={thirdNodeInfo.title} 
                         description={thirdNodeInfo.description} 
                         type='thirdNode' 
-                        handleTravelClick={transitionHandleTravelClick} 
+                        handleTravelClick={handleTravelClick} 
                         isTerminal={thirdNodeInfo.isTerminal}
                     />
                 </NodeAnimation>

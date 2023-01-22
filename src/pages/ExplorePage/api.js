@@ -15,8 +15,6 @@ export const getCities = async (country) => {
 }
 
 export const getCityDescriptions = async (cities) => {
-    console.log('cities was passed in:')
-    console.log(cities)
     return await Promise.all(
         cities.map((city) => {
             return getCityDescription(city);

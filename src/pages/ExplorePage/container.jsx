@@ -21,6 +21,10 @@ export const ExplorePageContainer = () => {
     const [city, setCity] = useState(null);
     const [type, setType] = useState(null);
 
+
+    // Used for animation
+    const [inProp, setInProp] = useState(true);
+
     useEffect(() => {
         if (type) { // Next nodes are destinations
             const populateNodesFromType = async () => {
@@ -45,6 +49,7 @@ export const ExplorePageContainer = () => {
                     description: descriptions[2],
                     isTerminal: true,
                 })
+                setInProp(true);
             }
             populateNodesFromType();
         } else if (city) { // Next nodes are destination categories
@@ -63,6 +68,7 @@ export const ExplorePageContainer = () => {
                 setThirdNodeInfo({
                     title: types[2],
                 })
+                setInProp(true);
             }
             populateNodesFromCity();
         } else { // Next nodes are cities
@@ -85,12 +91,15 @@ export const ExplorePageContainer = () => {
                     title: cities[2],
                     description: descriptions[2],
                 })
+                setInProp(true);
             }
             populateNodesFromCountry();
         }
     }, [country, city, type])
 
     const handleTravelClick = (title) => {
+        setInProp(false);
+
         if (type) { // Clicking on the next nodes (destinations) when we're already at a type shouldn't do anything.
             return;
         }
@@ -109,6 +118,7 @@ export const ExplorePageContainer = () => {
             secondNodeInfo={secondNodeInfo}
             thirdNodeInfo={thirdNodeInfo}
             handleTravelClick={handleTravelClick}
+            inProp={inProp}
         />
         : <Loader />
 }
