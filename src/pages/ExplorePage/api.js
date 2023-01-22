@@ -59,14 +59,14 @@ export const getDestinationDescription = async (destination) => {
 }
 
 // Server API calls
-export async function createUser(title, type, country, city, desc, user_id) {
+export async function addDestination(title, type, country, city, desc, user_id) {
     const data = {
         "title": title,
         "type": type,
         "country": country,
         "city": city,
         "desc": desc,
-        "user_id": user_id,
+        "user_id": user_id
     }
 
     const response = await fetch(`http://127.0.0.1:8080/api/add_destination`, {
