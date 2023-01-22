@@ -8,7 +8,8 @@ import {
     getCityDescription,
     getTypes,
     getDestinations,
-    getDestinationDescriptions
+    getDestinationDescriptions,
+    addDestination
 } from './api';
 
 export const ExplorePageContainer = () => {
@@ -23,7 +24,7 @@ export const ExplorePageContainer = () => {
 
     // Used for animation
     const [inProp, setInProp] = useState(true);
-    
+
     useEffect(() => {
         if (type) { // Next nodes are destinations
             const populateNodesFromType = async () => {
@@ -110,7 +111,10 @@ export const ExplorePageContainer = () => {
         }
     }
 
-    const handleAddDestination = () => {}
+    const handleAddDestination = async (title, description) => {
+        const response =  await addDestination(title, type, country, city, description, 6)
+        console.log(response)
+    }
 
     return originNodeInfo && firstNodeInfo && secondNodeInfo && thirdNodeInfo
         ? <ExplorePagePresentation

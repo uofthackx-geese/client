@@ -65,13 +65,17 @@ export async function addDestination(title, type, country, city, desc, user_id) 
         "type": type,
         "country": country,
         "city": city,
-        "desc": desc,
+        "description": desc,
         "user_id": user_id
     }
 
     const response = await fetch(`http://127.0.0.1:8080/api/add_destination`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Access-Control-Allow-Headers': '*', // this will allow all CORS requests
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET', // this states the allowed methods
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(data)
     })
     return await response.json();
