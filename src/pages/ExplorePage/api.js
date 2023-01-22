@@ -13,25 +13,42 @@ export const getCountryDescription = async (country) => {
 
 export const getCities = async (country) => {
     let citiesRaw = await generate(`List the 3 most popular cities in ${country}:`);
+
+    console.log('citiesRaw');
+    console.log(citiesRaw);
+
+    citiesRaw = citiesRaw.replace("\n1.", ", ");
+    citiesRaw = citiesRaw.replace("\n2.", ", ");
+    citiesRaw = citiesRaw.replace("\n3.", ", ");
+
+    console.log('aftrer nums replace');
+    console.log(citiesRaw);
+
     citiesRaw = stripNewlines(citiesRaw);
+
+    console.log('after strip');
+    console.log(citiesRaw);
 
     // Split string by commas (and whitespace)
     let popularCities = citiesRaw.split(/,\s*/);
 
-    return popularCities;
+    console.log('after split');
+    console.log(popularCities);
+
+    return popularCities.filter((item) => !!item);
 }
 
-export const getCityDescriptions = async (cities) => {
+export const getCityDescriptions = async (cities, country) => {
     return await Promise.all(
         cities.map((city) => {
-            return getCityDescription(city);
+            return getCityDescription(city, country);
         })
     )
 }
 
 // populateNodesFromCity
-export const getCityDescription = async (city) => {
-    const rawDescription = await generate(`Describe ${city}:`) + "...";
+export const getCityDescription = async (city, country) => {
+    const rawDescription = await generate(`Describe ${city} in ${country}:`) + "...";
     const strippedDescription = stripNewlines(rawDescription);
     return strippedDescription;
 }
@@ -53,20 +70,19 @@ export const getDestinations = async (type, city, country) => {
 
     // Split by spaces
     let popularDestinations = destinationsRaw.split(/,\s*/);
-    popularDestinations.shift(); // shift by 1 index (because first is empty)
-    return popularDestinations;
+    return popularDestinations.filter((item) => !!item);
 }
 
-export const getDestinationDescriptions = async (destinations) => {
+export const getDestinationDescriptions = async (destinations, city, country) => {
     return await Promise.all(
         destinations.map((destination) => {
-            return getDestinationDescription(destination);
+            return getDestinationDescription(destination, city, country);
         })
     )
 }
 
-export const getDestinationDescription = async (destination) => {
-    const rawDescription = await generate(`Describe ${destination}:`) + "...";
+export const getDestinationDescription = async (destination, city, country) => {
+    const rawDescription = await generate(`Describe ${destination} in ${city}, ${country}:`) + "...";
     const strippedDescription = stripNewlines(rawDescription);
     return strippedDescription;
 }

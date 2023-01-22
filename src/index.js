@@ -27,7 +27,7 @@ const router = createBrowserRouter([
     element: <TravelPlan />
   },
   {
-    path: "/explore",
+    path: "/explore/:country",
     element: <ExplorePage />
   },
   {

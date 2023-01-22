@@ -11,6 +11,7 @@ import {
     getDestinationDescriptions,
     addDestination
 } from './api';
+import { useParams } from 'react-router-dom';
 
 export const ExplorePageContainer = () => {
     const [originNodeInfo, setOriginNodeInfo] = useState(null);
@@ -18,7 +19,7 @@ export const ExplorePageContainer = () => {
     const [secondNodeInfo, setSecondNodeInfo] = useState(null);
     const [thirdNodeInfo, setThirdNodeInfo] = useState(null);
 
-    const [country, setCountry] = useState('Canada'); // TODO: make user input for getting country
+    const { country } = useParams();
     const [city, setCity] = useState(null);
     const [type, setType] = useState(null);
 
@@ -33,7 +34,7 @@ export const ExplorePageContainer = () => {
                     title: type,
                 });
 
-                const descriptions = await getDestinationDescriptions(destinations);
+                const descriptions = await getDestinationDescriptions(destinations, city, country);
                 setFirstNodeInfo({
                     title: destinations[0],
                     description: descriptions[0],
@@ -54,7 +55,7 @@ export const ExplorePageContainer = () => {
             populateNodesFromType();
         } else if (city) { // Next nodes are destination categories
             const populateNodesFromCity = async () => {
-                const [cityDescription, types] = await Promise.all([ getCityDescription(city), getTypes(city)])
+                const [cityDescription, types] = await Promise.all([ getCityDescription(city, country), getTypes(city)])
                 setOriginNodeInfo({
                     title: city,
                     description: cityDescription,
@@ -78,7 +79,7 @@ export const ExplorePageContainer = () => {
                     title: country,
                     description: countryDescription,
                 });
-                const descriptions = await getCityDescriptions(cities);
+                const descriptions = await getCityDescriptions(cities, country);
                 setFirstNodeInfo({
                     title: cities[0],
                     description: descriptions[0],

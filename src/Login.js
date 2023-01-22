@@ -15,12 +15,6 @@ const useStyles = makeStyles({
         height: '100vh',
         backgroundColor: 'lightblue',
     },
-    head1: {
-        color: 'black',
-        width: '100%',
-        justifyContent: 'center',
-        textAlign: 'center'
-    },
     head2: {
         color: 'black',
         width: '100%',

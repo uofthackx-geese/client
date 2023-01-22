@@ -1,14 +1,18 @@
 import './Header.css'
 import { useNavigate } from "react-router-dom";
 
-export const Header = ({ title, pathTo }) => {
+export const Header = ({ headerTitle, buttonLabel, buttonPathTo }) => {
     const navigate = useNavigate()
-    console.log(title)
+
+    const goToHome = () => {
+        navigate('/chooseCountry');
+    }
+
     return (
         <div id='header-parent'>
-            <div style={{fontSize: '200%', fontWeight: 'bold', fontFamily: 'monospace'}}>TripTailor</div>
-            <div id='header-title'>{title === 'Travel Plan' ? 'Explore': title}</div>
-            {pathTo && <div><button id='header-button' onClick={() => navigate(pathTo)}>{title.toUpperCase()}</button></div>}
+            <div style={{fontSize: '200%', fontWeight: 'bold', fontFamily: 'monospace'}} onClick={goToHome}>TripTailor</div>
+            <div id='header-title'>{headerTitle}</div>
+            {buttonPathTo && <div><button id='header-button' onClick={() => navigate(buttonPathTo)}>{buttonLabel.toUpperCase()}</button></div>}
         </div>
     )
 }
