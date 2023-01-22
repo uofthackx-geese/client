@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { makeStyles } from '@mui/styles'
 import Header from './components/Header'
-import {RxCross1} from 'react-icons/rx'
 import './TravelPlan.css'
 import TypeChip from './components/TypeChip'
 import DialogTP from './components/DialogTP'

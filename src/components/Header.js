@@ -7,8 +7,8 @@ export const Header = ({page}) => {
     return (
         <div id='header-parent'>
             <div style={{fontSize: '200%', fontWeight: 'bold', fontFamily: 'monospace'}}>TripTailor</div>
-            <div id='header-title'>{page === "EXPLORE" ? "Travel Plan": "Explore"}</div>
-            <div><button id='header-button' onClick={() => navigate(page === 'EXPLORE' ? '/explore' : '/travelplan')}>{page}</button></div>
+            <div id='header-title'>{page ? page.toLowerCase() : ''}</div>
+            {page && <div><button id='header-button' onClick={() => navigate(page === 'EXPLORE' ? '/explore' : '/travelplan')}>{page}</button></div>}
         </div>
     )
 }
