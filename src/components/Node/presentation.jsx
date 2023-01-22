@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@mui/styles'
 import { Box } from '@mui/material'
 import { DescriptionTooltip } from '../DescriptionTooltip/DescriptionTooltip'
@@ -56,6 +56,11 @@ export const NodePresentation = ({
 }) => {
     const classes = useStyles();
     const [isDisabled, setIsDisabled] = useState(false)
+    useEffect(() => {
+        if (isDisabled) {
+            setIsDisabled(false);
+        }
+    }, [title])
 
     const handleClick = handleTravelClick ? () => handleTravelClick(title) : () => {}
 
