@@ -21,10 +21,9 @@ export const ExplorePageContainer = () => {
     const [city, setCity] = useState(null);
     const [type, setType] = useState(null);
 
-
     // Used for animation
     const [inProp, setInProp] = useState(true);
-
+    
     useEffect(() => {
         if (type) { // Next nodes are destinations
             const populateNodesFromType = async () => {
@@ -111,6 +110,8 @@ export const ExplorePageContainer = () => {
         }
     }
 
+    const handleAddDestination = () => {}
+
     return originNodeInfo && firstNodeInfo && secondNodeInfo && thirdNodeInfo
         ? <ExplorePagePresentation
             originNodeInfo={originNodeInfo}
@@ -119,6 +120,7 @@ export const ExplorePageContainer = () => {
             thirdNodeInfo={thirdNodeInfo}
             handleTravelClick={handleTravelClick}
             inProp={inProp}
+            handleAddDestination={handleAddDestination}
         />
         : <Loader />
 }

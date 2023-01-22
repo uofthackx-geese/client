@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { NodePresentation } from './presentation'
 
 export const NodeContainer = ({
@@ -6,16 +5,9 @@ export const NodeContainer = ({
     description,
     handleTravelClick,
     type,
-    isAbleToAddToTrip,
     isTerminal,
+    handleAddDestination,
 }) => {
-    // TODO: either require caching for this state to persist or access DB to check if already added to Trip.
-    const [isAddedToTrip, setIsAddedToTrip] = useState(false);
-
-    const handleAddToTrip = () => {
-        setIsAddedToTrip(true);
-    }
-
     return (
         <NodePresentation 
             title={title} 
@@ -23,8 +15,7 @@ export const NodeContainer = ({
             handleTravelClick={isTerminal ? () => {} : handleTravelClick}
             type={type}
             isTerminal={isTerminal}
-            // isAbleToAddToTrip={isAbleToAddToTrip}
-            // handleAddToTrip={handleAddToTrip}
+            handleAddDestination={isTerminal && handleAddDestination ? handleAddDestination : () => {}}
         />
     );
 }

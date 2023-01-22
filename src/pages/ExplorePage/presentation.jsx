@@ -35,6 +35,7 @@ export const ExplorePagePresentation = ({
     thirdNodeInfo,
     handleTravelClick,
     inProp,
+    handleAddDestination,
 }) => {
     const classes = useStyles();
 
@@ -61,6 +62,7 @@ export const ExplorePagePresentation = ({
                         type='firstNode' 
                         handleTravelClick={handleTravelClick}
                         isTerminal={firstNodeInfo.isTerminal}
+                        handleAddDestination={handleAddDestination}
                     />
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} duration={500}>
@@ -73,6 +75,7 @@ export const ExplorePagePresentation = ({
                         type='secondNode' 
                         handleTravelClick={handleTravelClick}
                         isTerminal={secondNodeInfo.isTerminal}
+                        handleAddDestination={handleAddDestination}
                     />
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} duration={500}>
@@ -85,6 +88,7 @@ export const ExplorePagePresentation = ({
                         type='thirdNode' 
                         handleTravelClick={handleTravelClick} 
                         isTerminal={thirdNodeInfo.isTerminal}
+                        handleAddDestination={handleAddDestination}
                     />
                 </NodeAnimation>
 

@@ -52,8 +52,7 @@ export const NodePresentation = ({
     handleTravelClick,
     isTerminal,
     type, // One of originNode, firstNode, secondNode, thirdNode
-    isAbleToAddToTrip,
-    handleAddToTrip,
+    handleAddDestination,
 }) => {
     const classes = useStyles();
 
