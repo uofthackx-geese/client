@@ -94,11 +94,19 @@ export async function addDestination(title, type, country, city, description, us
     return await response.json();
 }
 
-// Server API calls
 export async function getAllData(user_id) {
     const response = await fetch(`http://127.0.0.1:8080/api/get_all_data?user_id=${user_id}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
     return await response.json();
+}
+
+export async function deleteDestination(dest_id) {
+    const response = await fetch(`http://127.0.0.1:8080/api/delete_destination`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({dest_id: dest_id})
+    })
+    return await response.json()
 }

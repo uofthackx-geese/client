@@ -4,7 +4,9 @@ import Header from './components/Header'
 import './TravelPlan.css'
 import TypeChip from './components/TypeChip'
 import DialogTP from './components/DialogTP'
-import { getAllData } from './pages/ExplorePage/api'
+import { getAllData, deleteDestination } from './pages/ExplorePage/api'
+import Collapse from '@mui/material/Collapse';
+import { Alert } from '@mui/material';
 
 const useStyles = makeStyles({
     container: {
@@ -123,6 +125,7 @@ export const TravelPlan = () => {
     const [isShowDialog, setIsShowDialog] = useState(false)
     const [payload, setPayload] = useState(null)
     const [travelPlan, setTravelPlan] = useState(null)
+    const [isShowAlert, setIsShowAlert] = useState(false)
 
     const handleGetAllDestinations = async (user_id) => {
         const response =  await getAllData(user_id)
@@ -130,15 +133,17 @@ export const TravelPlan = () => {
     }
 
 
-    const deleteDestination = (city, destinationTitle) => {
+    const handleDeleteDestination = async (city, destinationTitle, dest_id) => {
         let tempPlan = {...travelPlan}
         for (let i = 0; i < tempPlan?.response.length; ++i) {
             if (tempPlan.response[i].city === city) {
                 tempPlan.response[i].places = tempPlan.response[i].places.filter(destination => destination.title !== destinationTitle)
                 setTravelPlan(tempPlan)
-                return
+                break
             }
         }
+        const response = await deleteDestination(dest_id)
+        setIsShowAlert(true)
     }
 
     const test = [
@@ -206,7 +211,8 @@ export const TravelPlan = () => {
                     newTemp[i].places.push({
                         title: temp[j].title,
                         type: temp[j].type,
-                        description: temp[j].description
+                        description: temp[j].description,
+                        dest_id: temp[j].dest_id
                     })
                 }
             }
@@ -228,6 +234,7 @@ export const TravelPlan = () => {
 
     return (
         <>
+            <Collapse in={isShowAlert} sx={{zIndex: '1000', position: 'fixed', top: '100px', width: '80%', left: '10%'}}><Alert onClose={() => setIsShowAlert(false)}>Destination successfully deleted</Alert></Collapse>
             <div className={classes.container}>
                 <div className={classes.innerThing}>
                     <div style={{height: '100px'}}></div>
@@ -238,7 +245,7 @@ export const TravelPlan = () => {
                             return (
                                 <div>
                                     <div className='TPcity' onClick={() => {setIsShowDialog(true); setPayload({title: body.city, description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut erat in mi blandit ultricies. Curabitur vulputate, justo id porttitor tincidunt, dolor orci egestas erat, non blandit tellus mauris ut risus. Vestibulum ut cursus nisi, sed aliquam magna. Phasellus vel varius turpis, non malesuada velit. Suspendisse accumsan tellus vel ex sodales."});}}>{body.city}</div>
-                                    <ol className={classes.orderedlist}>{body?.places?.map((item, index) => <div className='liBox' onClick={() => {setIsShowDialog(true); setPayload({city: body.city, title: item.title, description: item.description });}}><div className={classes.liIndex}>{index + 1}</div> <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item.title}</div> <div><TypeChip type={item.type}/></div></div>)}</ol>
+                                    <ol className={classes.orderedlist}>{body?.places?.map((item, index) => <div className='liBox' onClick={() => {setIsShowDialog(true); setPayload({city: body.city, title: item.title, description: item.description, dest_id: item.dest_id });}}><div className={classes.liIndex}>{index + 1}</div> <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item.title}</div> <div><TypeChip type={item.type}/></div></div>)}</ol>
                                 </div>
                             )
                            }
@@ -249,7 +256,7 @@ export const TravelPlan = () => {
                 </div>
             </div>
             <Header title='Explore' pathTo='/explore'/>
-            <DialogTP isVisible={isShowDialog} setIsVisible={setIsShowDialog} payload={payload} deleteDestination={deleteDestination}/>
+            <DialogTP isVisible={isShowDialog} setIsVisible={setIsShowDialog} payload={payload} handleDeleteDestination={handleDeleteDestination}/>
         </>
     )
 }

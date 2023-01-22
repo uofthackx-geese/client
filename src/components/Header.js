@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 export const Header = ({ title, pathTo }) => {
     const navigate = useNavigate()
-    console.log(title)
     return (
         <div id='header-parent'>
             <div style={{fontSize: '200%', fontWeight: 'bold', fontFamily: 'monospace'}}>TripTailor</div>
