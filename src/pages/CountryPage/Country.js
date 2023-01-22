@@ -42,7 +42,7 @@ export const CountryPage = () => {
 
     const handleLuckyFeeling = () => {
         const randomLuckyCountry = getRandomFromArray(luckyCountryPool);
-        navigate(`/country/${randomLuckyCountry}`);
+        navigate(`/explore/${randomLuckyCountry}`);
     }
 
     return (
