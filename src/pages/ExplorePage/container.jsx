@@ -11,7 +11,7 @@ import {
     getDestinationDescriptions,
     addDestination
 } from './api';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 export const ExplorePageContainer = () => {
     const [originNodeInfo, setOriginNodeInfo] = useState(null);
@@ -22,6 +22,9 @@ export const ExplorePageContainer = () => {
     const { country } = useParams();
     const [city, setCity] = useState(null);
     const [type, setType] = useState(null);
+
+    // Stack of node history objects, which are just {originNodeInfo, firstNodeInfo, secondNodeInfo, thirdNodeInfo, city, type}
+    const [nodesHistory, setNodesHistory] = useState([]);
 
     // Used for animation
     const [inProp, setInProp] = useState(true);
@@ -62,13 +65,13 @@ export const ExplorePageContainer = () => {
                 });
                 setFirstNodeInfo({
                     title: types[0],
-                })
+                });
                 setSecondNodeInfo({
                     title: types[1],
                 })
                 setThirdNodeInfo({
                     title: types[2],
-                })
+                });
                 setInProp(true);
             }
             populateNodesFromCity();
@@ -106,15 +109,53 @@ export const ExplorePageContainer = () => {
         }
 
         if (city) {
+            setNodesHistory(nodesHistory.concat([
+                {
+                    originNodeInfo,
+                    firstNodeInfo,
+                    secondNodeInfo,
+                    thirdNodeInfo,
+                    city,
+                    type
+                }
+            ]));
             setType(title)
         } else if (country) {
+            setNodesHistory(nodesHistory.concat([
+                {
+                    originNodeInfo,
+                    firstNodeInfo,
+                    secondNodeInfo,
+                    thirdNodeInfo,
+                    city,
+                    type
+                }
+            ]))
             setCity(title);
         }
     }
 
+    const navigate = useNavigate();
+    const getLastElement = (arr) => arr[arr.length-1];
+
+    const handleBackArrowClick = () => {
+        if (!nodesHistory.length) { // No history, go back to choose country
+            navigate('/chooseCountry');
+        }
+
+        const historyToUse = getLastElement(nodesHistory);
+        setNodesHistory(nodesHistory.slice(0, nodesHistory.length - 1)); // Pop the history off the stack
+        setOriginNodeInfo(historyToUse.originNodeInfo);
+        setFirstNodeInfo(historyToUse.firstNodeInfo);
+        setSecondNodeInfo(historyToUse.secondNodeInfo);
+        setThirdNodeInfo(historyToUse.thirdNodeInfo);
+        setCity(historyToUse.city);
+        setType(historyToUse.type);
+    }
+
     const handleAddDestination = async (title, description) => {
         const response =  await addDestination(title, type, country, city, description, 6)
-        console.log(response)
+        // console.log(response)
     }
 
     return originNodeInfo && firstNodeInfo && secondNodeInfo && thirdNodeInfo
@@ -126,6 +167,7 @@ export const ExplorePageContainer = () => {
             handleTravelClick={handleTravelClick}
             inProp={inProp}
             handleAddDestination={handleAddDestination}
+            handleBackArrowClick={handleBackArrowClick}
         />
         : <Loader />
 }

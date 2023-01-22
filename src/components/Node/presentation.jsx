@@ -16,7 +16,6 @@ const useStyles = makeStyles({
         height: '100px',
         position: 'absolute',
         cursor: 'pointer',
-        display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },

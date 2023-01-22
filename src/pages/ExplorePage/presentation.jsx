@@ -5,8 +5,9 @@ import Header from '../../components/Header'
 import { ReactComponent as FirstArrow } from './arrow1.svg';
 import { ReactComponent as SecondArrow } from './arrow2.svg';
 import { ReactComponent as ThirdArrow } from './arrow3.svg';
-import { ReactComponent as FourthArrow } from './arrow4.svg';
+// import { ReactComponent as FourthArrow } from './arrow4.svg';
 import { NodeAnimation } from './NodeAnimation';
+import { BsFillArrowDownCircleFill } from 'react-icons/bs'
 
 const useStyles = makeStyles({
     explorePageContainer: {
@@ -26,6 +27,15 @@ const useStyles = makeStyles({
     arrow4: {
         position: 'absolute',
     },
+    BackIcon: {
+        width: '50px',
+        position: 'absolute',
+        left: '50%',
+        marginLeft: '-24px', // Half of width
+        top: '90%',
+        color: 'white',
+        fontSize: '32px',
+    },
 })
 
 export const ExplorePagePresentation = ({
@@ -36,6 +46,7 @@ export const ExplorePagePresentation = ({
     handleTravelClick,
     inProp,
     handleAddDestination,
+    handleBackArrowClick,
 }) => {
     const classes = useStyles();
 
@@ -43,8 +54,8 @@ export const ExplorePagePresentation = ({
         <>
             <Box className={classes.explorePageContainer}>
                 <NodeAnimation inProp={inProp} duration={300}>
-                    <Box sx={{pointerEvents: 'none'}}>
-                        <FirstArrow className={classes.arrow1} />
+                    <Box>
+                        <BsFillArrowDownCircleFill className={classes.BackIcon} onClick={handleBackArrowClick} />
                     </Box>
                     <Node 
                         title={originNodeInfo.title} 
@@ -54,7 +65,7 @@ export const ExplorePagePresentation = ({
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} duration={500}>
                     <Box sx={{pointerEvents: 'none'}}>
-                        <SecondArrow className={classes.arrow2} />
+                        <FirstArrow className={classes.arrow1} />
                     </Box>
                     <Node 
                         title={firstNodeInfo.title} 
@@ -67,7 +78,7 @@ export const ExplorePagePresentation = ({
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} duration={500}>
                     <Box sx={{pointerEvents: 'none'}}>
-                        <ThirdArrow className={classes.arrow3} />
+                        <SecondArrow className={classes.arrow2} />
                     </Box>
                     <Node 
                         title={secondNodeInfo.title} 
@@ -80,7 +91,7 @@ export const ExplorePagePresentation = ({
                 </NodeAnimation>
                 <NodeAnimation inProp={inProp} duration={500}>
                     <Box sx={{pointerEvents: 'none'}}>
-                        <FourthArrow className={classes.arrow4} />
+                        <ThirdArrow className={classes.arrow3} />
                     </Box>
                     <Node 
                         title={thirdNodeInfo.title} 
