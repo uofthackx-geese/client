@@ -53,6 +53,20 @@ const useStyles = makeStyles({
         border: '1px rgba(0, 0, 0, 0.3) solid',
         padding: '5px',
         borderRadius: '3px'
+    },
+    emptyListText: {
+        textAlign: 'center',
+        marginLeft: '440px',
+        fontWeight: 'bold',
+        fontSize: '2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        backgroundColor: 'white',
+        width: 'fit-content',
+        padding: '20px',
+        borderRadius: '10px',
+        boxShadow: 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px'
     }
 })
 
@@ -184,6 +198,7 @@ export const TravelPlan = () => {
 
     const buildStructure = async () => {
         let newTemp = []
+        let country_name = null
         let response_data = await handleGetAllDestinations(6)
         let temp = response_data.response.map(dest => {
             let exists = false
@@ -195,6 +210,9 @@ export const TravelPlan = () => {
             }
             if (!exists) {
                 newTemp.push({city: dest[4], places: []})
+            }
+            if (country_name == null) {
+                country_name = dest[3]
             }
             return ({
                 dest_id: dest[0],
@@ -217,8 +235,7 @@ export const TravelPlan = () => {
                 }
             }
         }
-
-        return {country: 'Canada', response: newTemp}
+        return {country: country_name, response: newTemp}
     }
 
     useEffect(() => {
@@ -252,6 +269,7 @@ export const TravelPlan = () => {
                            return <></>
                         }
                         )}
+                        {travelPlan?.country == null && <div className={classes.emptyListText}><div>Nothing to see here.</div><div>Build your travel plan now!</div></div>}
                     </div>
                 </div>
             </div>
