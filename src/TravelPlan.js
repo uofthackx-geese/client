@@ -71,71 +71,6 @@ const useStyles = makeStyles({
 })
 
 export const TravelPlan = () => {
-    /*const [travelPlan, setTravelPlan] = useState({
-        country: 'Canada',
-        response: [
-            {
-                city: 'Toronto',
-                places: [
-                    {
-                        title: 'Ontario Science Centre',
-                        type: 'restaurant',
-                        description: 'fwefwfwfwfw'
-                    },
-                    {
-                        title: 'CN Tower',
-                        type: 'shopping mall',
-                        description: '382r238hio2h23hr32rh293hr- 293rh3rh92'
-                    },
-                    {
-                        title: 'Royal Ontario Gallery',
-                        type: 'hotel',
-                        description: 'ee2e21c 328ry23 r9rh2hf'
-                    }
-                ]
-            },
-            {
-                city: 'Ottawa',
-                places: [
-                    {
-                        title: 'Ontario Science Centre',
-                        type: 'restaurant',
-                        description: 'fwefwfwfwfw'
-                    },
-                    {
-                        title: 'CN Tower',
-                        type: 'shopping mall',
-                        description: '382r238hio2h23hr32rh293hr- 293rh3rh92'
-                    },
-                    {
-                        title: 'Royal Ontario Gallery',
-                        type: 'hotel',
-                        description: 'ee2e21c 328ry23 r9rh2hf'
-                    }
-                ]
-            },
-            {
-                city: 'Vancouver',
-                places: [
-                    {
-                        title: 'Ontario Science Centre',
-                        type: 'restaurant',
-                        description: 'fwefwfwfwfw'
-                    },
-                    {
-                        title: 'CN Tower',
-                        type: 'shopping mall',
-                        description: '382r238hio2h23hr32rh293hr- 293rh3rh92'
-                    },
-                    {
-                        title: 'Royal Ontario Gallery',
-                        type: 'hotel',
-                        description: 'ee2e21c 328ry23 r9rh2hf'
-                    }
-                ]
-            }
-        ]
-    })*/
     const [isShowDialog, setIsShowDialog] = useState(false)
     const [payload, setPayload] = useState(null)
     const [travelPlan, setTravelPlan] = useState(null)
@@ -146,55 +81,31 @@ export const TravelPlan = () => {
         return response
     }
 
+    const maybeRemoveCity = (plan, city) => {
+        for (let i =0; i < plan.response.length; ++i) {
+            if (!plan.response[i].places.length) {
+                plan.response = plan.response.filter(area => area.city !== city)
+                return plan
+            }
+        }
+        return plan
+    }
 
     const handleDeleteDestination = async (city, destinationTitle, dest_id) => {
         let tempPlan = {...travelPlan}
         for (let i = 0; i < tempPlan?.response.length; ++i) {
             if (tempPlan.response[i].city === city) {
                 tempPlan.response[i].places = tempPlan.response[i].places.filter(destination => destination.title !== destinationTitle)
-                setTravelPlan(tempPlan)
+                setTravelPlan(maybeRemoveCity(tempPlan, tempPlan.response[i].city))
                 break
             }
         }
         const response = await deleteDestination(dest_id)
         setIsShowAlert(true)
+        setTimeout(() => { // remove alert after 2 seconds
+            setIsShowAlert(false)
+        }, 2000)
     }
-
-    const test = [
-        [
-            4,
-            "Great Wall of China",
-            "hotel",
-            "China",
-            "Beijing",
-            "its a hotel"
-        ],
-        [
-            5,
-            "Canada's Wonderland",
-            "shopping mall",
-            "Canada",
-            "Toronto",
-            "its a hotel"
-        ],
-        
-        [
-            6,
-            "Cool Land",
-            "hotel",
-            "Canada",
-            "Toronto",
-            "its a hotel"
-        ],
-        [
-            7,
-            "COOL WALL", // title
-            "restaurant", // type
-            "China", // country
-            "Beijing", // city
-            "its a hotel" // description
-        ]
-    ]
 
     const buildStructure = async () => {
         let newTemp = []
@@ -220,7 +131,8 @@ export const TravelPlan = () => {
                 type: dest[2],
                 country: dest[3],
                 city: dest[4],
-                description: dest[5]
+                description: dest[5],
+                imageURL: dest[6]
             })
         })
         for (let i = 0; i < newTemp.length; ++i) {
@@ -230,7 +142,8 @@ export const TravelPlan = () => {
                         title: temp[j].title,
                         type: temp[j].type,
                         description: temp[j].description,
-                        dest_id: temp[j].dest_id
+                        dest_id: temp[j].dest_id,
+                        imageURL: temp[j].imageURL
                     })
                 }
             }
@@ -251,25 +164,25 @@ export const TravelPlan = () => {
 
     return (
         <>
-            <Collapse in={isShowAlert} sx={{zIndex: '1000', position: 'fixed', top: '100px', width: '80%', left: '10%'}}><Alert onClose={() => setIsShowAlert(false)}>Destination successfully deleted</Alert></Collapse>
+            <Collapse in={isShowAlert} sx={{zIndex: '1000', position: 'fixed', top: '100px', width: '80%', left: '10%'}}><Alert variant="filled" severity="success">Destination successfully deleted</Alert></Collapse>
             <div className={classes.container}>
                 <div className={classes.innerThing}>
                     <div style={{height: '100px'}}></div>
-                    <div id='TPcountry'><label>{travelPlan?.country}</label></div>
+                    <div id='TPcountry'><label>{travelPlan?.response?.length ? travelPlan?.country : null}</label></div>
                     <div id='TPsubbody'>
                         {travelPlan?.response.map(body => {
                            if (body.places.length) {
                             return (
                                 <div>
-                                    <div className='TPcity' onClick={() => {setIsShowDialog(true); setPayload({title: body.city, description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut erat in mi blandit ultricies. Curabitur vulputate, justo id porttitor tincidunt, dolor orci egestas erat, non blandit tellus mauris ut risus. Vestibulum ut cursus nisi, sed aliquam magna. Phasellus vel varius turpis, non malesuada velit. Suspendisse accumsan tellus vel ex sodales."});}}>{body.city}</div>
-                                    <ol className={classes.orderedlist}>{body?.places?.map((item, index) => <div className='liBox' onClick={() => {setIsShowDialog(true); setPayload({city: body.city, title: item.title, description: item.description, dest_id: item.dest_id });}}><div className={classes.liIndex}>{index + 1}</div> <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item.title}</div> <div><TypeChip type={item.type}/></div></div>)}</ol>
+                                    <div className='TPcity' onClick={() => {setIsShowDialog(true); setPayload({title: body.city, description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut erat in mi blandit ultricies. Curabitur vulputate, justo id porttitor tincidunt, dolor orci egestas erat, non blandit tellus mauris ut risus. Vestibulum ut cursus nisi, sed aliquam magna. Phasellus vel varius turpis, non malesuada velit. Suspendisse accumsan tellus vel ex sodales.", isDelete: false});}}>{body.city}</div>
+                                    <ol className={classes.orderedlist}>{body?.places?.map((item, index) => <div className='liBox' onClick={() => {setIsShowDialog(true); setPayload({city: body.city, title: item.title, description: item.description, dest_id: item.dest_id, imageURL: item?.imageURL, isDelete: true });}}><div className={classes.liIndex}>{index + 1}</div> <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item.title}</div> <div><TypeChip type={item.type}/></div></div>)}</ol>
                                 </div>
                             )
                            }
                            return <></>
                         }
                         )}
-                        {travelPlan?.country == null && <div className={classes.emptyListText}><div>Nothing to see here.</div><div>Build your travel plan now!</div></div>}
+                        {!(travelPlan?.country && travelPlan?.response?.length) && <div className={classes.emptyListText}><div>Nothing to see here.</div><div>Build your travel plan now!</div></div>}
                     </div>
                 </div>
             </div>

@@ -8,6 +8,9 @@ import { ReactComponent as ThirdArrow } from './arrow3.svg';
 // import { ReactComponent as FourthArrow } from './arrow4.svg';
 import { NodeAnimation } from './NodeAnimation';
 import { BsFillArrowDownCircleFill } from 'react-icons/bs'
+import Collapse from '@mui/material/Collapse';
+import { Alert } from '@mui/material';
+import {useEffect, useState} from 'react';
 
 const useStyles = makeStyles({
     explorePageContainer: {
@@ -37,6 +40,10 @@ const useStyles = makeStyles({
         color: 'white',
         fontSize: '32px',
         cursor: 'pointer',
+        transition: '0.5s',
+        '&:hover': {
+            fontSize: '45px'
+        }
     },
     loader: {
         position: 'absolute',
@@ -56,9 +63,19 @@ export const ExplorePagePresentation = ({
     handleBackArrowClick,
 }) => {
     const classes = useStyles();
+    const [isShowAlert, setIsShowAlert] = useState(true)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsShowAlert(false)
+        }, 3000)
+    })
 
     return (
         <>
+            <Collapse in={isShowAlert}>
+                <Alert sx={{zIndex: '1000', position: 'fixed', top: '85px', width: '80%', left: '10%'}} variant="filled" severity="warning">Your travel plan, if exists, has been cleared out!</Alert>
+            </Collapse>
             <Box className={classes.explorePageContainer}>
                 <NodeAnimation inProp={inProp} duration={300}>
                     <Box>

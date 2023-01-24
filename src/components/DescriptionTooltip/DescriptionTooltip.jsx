@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { HtmlTooltip } from "./HtmlTooltip";
 import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -15,6 +15,7 @@ export const DescriptionTooltip = ({
     title,
     description,
     children,
+    imageURL
 }) => {
     const classes = useStyles();
 
@@ -23,6 +24,7 @@ export const DescriptionTooltip = ({
             <>
                 <Typography color="inherit" className={classes.title}>{title}</Typography>
                 <Typography color="inherit">{description}</Typography>
+                {imageURL && <img src={imageURL} style={{width: '100%', height: '250px', objectFit: 'contain'}}/>}
             </>
         }>
             {children}
