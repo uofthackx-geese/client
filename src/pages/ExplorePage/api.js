@@ -88,7 +88,7 @@ export const getDestinationDescription = async (destination, city, country) => {
 }
 
 // Server API calls
-export async function addDestination(title, type, country, city, description, user_id) {
+export async function addDestination(title, type, country, city, description, imageURL, user_id) {
     const lowercaseSingularType = type.toLowerCase().substring(0, type.length - 1);
 
     const data = {
@@ -97,6 +97,7 @@ export async function addDestination(title, type, country, city, description, us
         "country": country,
         "city": city,
         "description": description,
+        "image_url": imageURL,
         "user_id": user_id
     }
 
@@ -133,4 +134,14 @@ export async function restartTP() {
         headers: { 'Content-Type': 'application/json' }
     })
     return await response.json()
+}
+
+
+// Unsplash API Call
+
+export async function getImage(request) {
+    const response = await fetch(`https://api.unsplash.com/search/photos?query=${request}&client_id=uTDmHxbbFGFa5RNb1HNTJzdEWlmLMo5XCObl_UhZ3nE`, {
+        method: 'GET'
+    })
+    return await response.json();
 }

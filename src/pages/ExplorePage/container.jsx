@@ -153,9 +153,9 @@ export const ExplorePageContainer = () => {
         setType(historyToUse.type);
     }
 
-    const handleAddDestination = async (title, description) => {
-        const response =  await addDestination(title, type, country, city, description, 6)
-        // console.log(response)
+    const handleAddDestination = async (title, description, imageURL) => {
+        const response =  await addDestination(title, type, country, city, description, imageURL, 6)
+        //console.log(response)
     }
 
     return originNodeInfo && firstNodeInfo && secondNodeInfo && thirdNodeInfo
