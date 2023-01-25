@@ -14,27 +14,14 @@ export const getCountryDescription = async (country) => {
 export const getCities = async (country) => {
     let citiesRaw = await generate(`List the 3 most popular cities in ${country}:`);
 
-    console.log('citiesRaw');
-    console.log(citiesRaw);
-
     citiesRaw = citiesRaw.replace("\n1.", ", ");
     citiesRaw = citiesRaw.replace("\n2.", ", ");
     citiesRaw = citiesRaw.replace("\n3.", ", ");
 
-    console.log('aftrer nums replace');
-    console.log(citiesRaw);
-
     citiesRaw = stripNewlines(citiesRaw);
-
-    console.log('after strip');
-    console.log(citiesRaw);
 
     // Split string by commas (and whitespace)
     let popularCities = citiesRaw.split(/,\s*/);
-
-    console.log('after split');
-    console.log(popularCities);
-
     return popularCities.filter((item) => !!item);
 }
 

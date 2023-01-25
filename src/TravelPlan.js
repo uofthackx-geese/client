@@ -173,9 +173,33 @@ export const TravelPlan = () => {
                         {travelPlan?.response.map(body => {
                            if (body.places.length) {
                             return (
-                                <div>
+                                <div key={body.city}>
                                     <div className='TPcity' onClick={() => {setIsShowDialog(true); setPayload({title: body.city, description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut erat in mi blandit ultricies. Curabitur vulputate, justo id porttitor tincidunt, dolor orci egestas erat, non blandit tellus mauris ut risus. Vestibulum ut cursus nisi, sed aliquam magna. Phasellus vel varius turpis, non malesuada velit. Suspendisse accumsan tellus vel ex sodales.", isDelete: false});}}>{body.city}</div>
-                                    <ol className={classes.orderedlist}>{body?.places?.map((item, index) => <div className='liBox' onClick={() => {setIsShowDialog(true); setPayload({city: body.city, title: item.title, description: item.description, dest_id: item.dest_id, imageURL: item?.imageURL, isDelete: true });}}><div className={classes.liIndex}>{index + 1}</div> <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item.title}</div> <div><TypeChip type={item.type}/></div></div>)}</ol>
+                                    <ol className={classes.orderedlist}>
+                                        {body?.places?.map((item, index) => {
+                                            return (
+                                                <div 
+                                                    className='liBox' 
+                                                    onClick={() => {
+                                                        setIsShowDialog(true); 
+                                                        setPayload({
+                                                            city: body.city, 
+                                                            title: item.title, 
+                                                            description: item.description, 
+                                                            dest_id: item.dest_id, 
+                                                            imageURL: item?.imageURL, 
+                                                            isDelete: true 
+                                                        });
+                                                    }}
+                                                    key={item.title}
+                                                >
+                                                    <div className={classes.liIndex}>{index + 1}</div> 
+                                                    <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item.title}</div> 
+                                                    <div><TypeChip type={item.type}/></div>
+                                                </div>
+                                            )
+                                        })}
+                                    </ol>
                                 </div>
                             )
                            }
