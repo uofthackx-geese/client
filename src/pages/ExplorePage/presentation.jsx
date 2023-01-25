@@ -53,10 +53,7 @@ const useStyles = makeStyles({
 })
 
 export const ExplorePagePresentation = ({
-    originNodeInfo,
-    firstNodeInfo,
-    secondNodeInfo,
-    thirdNodeInfo,
+    nodesInfo,
     handleTravelClick,
     inProp,
     handleAddDestination,
@@ -70,6 +67,11 @@ export const ExplorePagePresentation = ({
             setIsShowAlert(false)
         }, 3000)
     })
+
+    const originNodeInfo = nodesInfo.origin;
+    const firstNodeInfo = nodesInfo.first;
+    const secondNodeInfo = nodesInfo.second;
+    const thirdNodeInfo = nodesInfo.third;
 
     return (
         <>
@@ -119,7 +121,7 @@ export const ExplorePagePresentation = ({
                 </NodeAnimation>
 
                 <Header headerTitle='Explore' buttonLabel='Travel Plan' buttonPathTo='/travelplan'/>
-                {!inProp && <Box class={classes.loader}>
+                {!inProp && <Box className={classes.loader}>
                     <CircularProgress />
                 </Box>}
             </Box>

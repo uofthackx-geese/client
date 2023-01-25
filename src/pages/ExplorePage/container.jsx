@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useReducer } from 'react'
 import { Loader } from '../../components/Loader';
 import { ExplorePagePresentation } from './presentation';
 import {
@@ -14,124 +14,131 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 
 export const ExplorePageContainer = () => {
-    const [originNodeInfo, setOriginNodeInfo] = useState(null);
-    const [firstNodeInfo, setFirstNodeInfo] = useState(null);
-    const [secondNodeInfo, setSecondNodeInfo] = useState(null);
-    const [thirdNodeInfo, setThirdNodeInfo] = useState(null);
-
     const { country } = useParams();
-    const [city, setCity] = useState(null);
-    const [type, setType] = useState(null);
+    const [nodesInfo, setNodesInfo] = useState({
+        origin: null,
+        first: null,
+        second: null,
+        third: null,
+        city: null,
+        type: null,
+    });
 
-    // Stack of node history objects, which are just {originNodeInfo, firstNodeInfo, secondNodeInfo, thirdNodeInfo, city, type}
+    // Stack of nodeInfo objects
     const [nodesHistory, setNodesHistory] = useState([]);
 
     // Used for animation
     const [inProp, setInProp] = useState(true);
 
     useEffect(() => {
-        if (type) { // Next nodes are destinations
+        console.log('useEffect', nodesInfo);
+        if (nodesInfo.type) { // Next nodes are destinations
             const populateNodesFromType = async () => {
-                const destinations = await getDestinations(type, city, country);
-                setOriginNodeInfo({
-                    title: type,
-                });
+                const destinations = await getDestinations(nodesInfo.type, nodesInfo.city, country);
+                const descriptions = await getDestinationDescriptions(destinations, nodesInfo.city, country);
 
-                const descriptions = await getDestinationDescriptions(destinations, city, country);
-                setFirstNodeInfo({
-                    title: destinations[0],
-                    description: descriptions[0],
-                    isTerminal: true,
-                })
-                setSecondNodeInfo({
-                    title: destinations[1],
-                    description: descriptions[1],
-                    isTerminal: true,
-                })
-                setThirdNodeInfo({
-                    title: destinations[2],
-                    description: descriptions[2],
-                    isTerminal: true,
-                })
+                const updatedNodesInfo = {
+                    ...nodesInfo,
+                    origin: {
+                        title: nodesInfo.type,
+                    },
+                    first: {
+                        title: destinations[0],
+                        description: descriptions[0],
+                        isTerminal: true,
+                    },
+                    second: {
+                        title: destinations[1],
+                        description: descriptions[1],
+                        isTerminal: true,
+                    },
+                    third: {
+                        title: destinations[2],
+                        description: descriptions[2],
+                        isTerminal: true,
+                    },
+                }
+                setNodesInfo(updatedNodesInfo);
+
                 setInProp(true);
             }
             populateNodesFromType();
-        } else if (city) { // Next nodes are destination categories
+        } else if (nodesInfo.city) { // Next nodes are destination categories
             const populateNodesFromCity = async () => {
-                const [cityDescription, types] = await Promise.all([ getCityDescription(city, country), getTypes(city)])
-                setOriginNodeInfo({
-                    title: city,
-                    description: cityDescription,
-                });
-                setFirstNodeInfo({
-                    title: types[0],
-                });
-                setSecondNodeInfo({
-                    title: types[1],
-                })
-                setThirdNodeInfo({
-                    title: types[2],
-                });
+                const [cityDescription, types] = await Promise.all([ getCityDescription(nodesInfo.city, country), getTypes(nodesInfo.city)])
+
+                const updatedNodesInfo = {
+                    ...nodesInfo,
+                    origin: {
+                        title: nodesInfo.city,
+                        description: cityDescription,
+                    },
+                    first: {
+                        title: types[0],
+                    },
+                    second: {
+                        title: types[1],
+                    },
+                    third: {
+                        title: types[2],
+                    },
+                }
+                setNodesInfo(updatedNodesInfo);
+
                 setInProp(true);
             }
             populateNodesFromCity();
         } else { // Next nodes are cities
             const populateNodesFromCountry = async () => {
                 const [countryDescription, cities] = await Promise.all([getCountryDescription(country), getCities(country)]);
-                setOriginNodeInfo({
-                    title: country,
-                    description: countryDescription,
-                });
                 const descriptions = await getCityDescriptions(cities, country);
-                setFirstNodeInfo({
-                    title: cities[0],
-                    description: descriptions[0],
-                })
-                setSecondNodeInfo({
-                    title: cities[1],
-                    description: descriptions[1],
-                })
-                setThirdNodeInfo({
-                    title: cities[2],
-                    description: descriptions[2],
-                })
+
+                const updatedNodesInfo = {
+                    ...nodesInfo,
+                    origin: {
+                        title: country,
+                        description: countryDescription,
+                    },
+                    first: {
+                        title: cities[0],
+                        description: descriptions[0],
+                    },
+                    second: {
+                        title: cities[1],
+                        description: descriptions[1],
+                    },
+                    third: {
+                        title: cities[2],
+                        description: descriptions[2],
+                    },
+                }
+                setNodesInfo(updatedNodesInfo);
+                
                 setInProp(true);
             }
             populateNodesFromCountry();
         }
-    }, [country, city, type])
+    }, [country, nodesInfo.city, nodesInfo.type])
 
     const handleTravelClick = (title) => {
         setInProp(false);
 
-        if (type) { // Clicking on the next nodes (destinations) when we're already at a type shouldn't do anything.
+        if (nodesInfo.type) { // Clicking on the next nodes (destinations) when we're already at a type shouldn't do anything.
             return;
         }
 
-        if (city) {
-            setNodesHistory(nodesHistory.concat([
-                {
-                    originNodeInfo,
-                    firstNodeInfo,
-                    secondNodeInfo,
-                    thirdNodeInfo,
-                    city,
-                    type
-                }
-            ]));
-            setType(title)
+        if (nodesInfo.city) {
+            setNodesHistory(nodesHistory.concat([nodesInfo]));
+            setNodesInfo({
+                ...nodesInfo,
+                type: title
+            })
         } else if (country) {
-            setNodesHistory(nodesHistory.concat([
-                {
-                    originNodeInfo,
-                    firstNodeInfo,
-                    secondNodeInfo,
-                    thirdNodeInfo,
-                    city,
-                    type
-                }
-            ]))
-            setCity(title);
+            setNodesHistory(nodesHistory.concat([nodesInfo]));
+            setNodesInfo({
+                ...nodesInfo,
+                city: title,
+            })
         }
     }
 
@@ -143,27 +150,19 @@ export const ExplorePageContainer = () => {
             navigate('/chooseCountry');
         }
 
+        setInProp(false);
         const historyToUse = getLastElement(nodesHistory);
         setNodesHistory(nodesHistory.slice(0, nodesHistory.length - 1)); // Pop the history off the stack
-        setOriginNodeInfo(historyToUse.originNodeInfo);
-        setFirstNodeInfo(historyToUse.firstNodeInfo);
-        setSecondNodeInfo(historyToUse.secondNodeInfo);
-        setThirdNodeInfo(historyToUse.thirdNodeInfo);
-        setCity(historyToUse.city);
-        setType(historyToUse.type);
+        setNodesInfo(historyToUse);
     }
 
     const handleAddDestination = async (title, description, imageURL) => {
-        const response =  await addDestination(title, type, country, city, description, imageURL, 6)
-        //console.log(response)
+        await addDestination(title, nodesInfo.type, country, nodesInfo.city, description, imageURL, 6);
     }
 
-    return originNodeInfo && firstNodeInfo && secondNodeInfo && thirdNodeInfo
+    return nodesInfo.origin && nodesInfo.first && nodesInfo.second && nodesInfo.third
         ? <ExplorePagePresentation
-            originNodeInfo={originNodeInfo}
-            firstNodeInfo={firstNodeInfo}
-            secondNodeInfo={secondNodeInfo}
-            thirdNodeInfo={thirdNodeInfo}
+            nodesInfo={nodesInfo}
             handleTravelClick={handleTravelClick}
             inProp={inProp}
             handleAddDestination={handleAddDestination}

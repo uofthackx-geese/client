@@ -7,6 +7,7 @@ import DialogTP from './components/DialogTP'
 import { getAllData, deleteDestination } from './pages/ExplorePage/api'
 import Collapse from '@mui/material/Collapse';
 import { Alert } from '@mui/material';
+import { LoaderBox } from './components/LoaderBox'
 
 const useStyles = makeStyles({
     container: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
     },
     innerThing: {
         width: '100%',
-        minHeight: '900px',
+        minHeight: '100vh',
         height: '100%',
         backgroundColor: 'lightblue',
         overflowX: 'hidden',
@@ -75,9 +76,11 @@ export const TravelPlan = () => {
     const [payload, setPayload] = useState(null)
     const [travelPlan, setTravelPlan] = useState(null)
     const [isShowAlert, setIsShowAlert] = useState(false)
+    const [showLoader, setShowLoader] = useState(true)
 
     const handleGetAllDestinations = async (user_id) => {
         const response =  await getAllData(user_id)
+        setShowLoader(false)
         return response
     }
 
@@ -164,7 +167,9 @@ export const TravelPlan = () => {
 
     return (
         <>
-            <Collapse in={isShowAlert} sx={{zIndex: '1000', position: 'fixed', top: '100px', width: '80%', left: '10%'}}><Alert variant="filled" severity="success">Destination successfully deleted</Alert></Collapse>
+            <Collapse in={isShowAlert} sx={{zIndex: '1000', position: 'fixed', top: '100px', width: '80%', left: '10%'}}>
+                <Alert variant="filled" severity="success">Destination successfully deleted</Alert>
+            </Collapse>
             <div className={classes.container}>
                 <div className={classes.innerThing}>
                     <div style={{height: '100px'}}></div>
@@ -173,16 +178,41 @@ export const TravelPlan = () => {
                         {travelPlan?.response.map(body => {
                            if (body.places.length) {
                             return (
-                                <div>
+                                <div key={body.city}>
                                     <div className='TPcity' onClick={() => {setIsShowDialog(true); setPayload({title: body.city, description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut erat in mi blandit ultricies. Curabitur vulputate, justo id porttitor tincidunt, dolor orci egestas erat, non blandit tellus mauris ut risus. Vestibulum ut cursus nisi, sed aliquam magna. Phasellus vel varius turpis, non malesuada velit. Suspendisse accumsan tellus vel ex sodales.", isDelete: false});}}>{body.city}</div>
-                                    <ol className={classes.orderedlist}>{body?.places?.map((item, index) => <div className='liBox' onClick={() => {setIsShowDialog(true); setPayload({city: body.city, title: item.title, description: item.description, dest_id: item.dest_id, imageURL: item?.imageURL, isDelete: true });}}><div className={classes.liIndex}>{index + 1}</div> <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item.title}</div> <div><TypeChip type={item.type}/></div></div>)}</ol>
+                                    <ol className={classes.orderedlist}>
+                                        {body?.places?.map((item, index) => {
+                                            return (
+                                                <div 
+                                                    className='liBox' 
+                                                    onClick={() => {
+                                                        setIsShowDialog(true); 
+                                                        setPayload({
+                                                            city: body.city, 
+                                                            title: item.title, 
+                                                            description: item.description, 
+                                                            dest_id: item.dest_id, 
+                                                            imageURL: item?.imageURL, 
+                                                            isDelete: true 
+                                                        });
+                                                    }}
+                                                    key={item.title}
+                                                >
+                                                    <div className={classes.liIndex}>{index + 1}</div> 
+                                                    <div style={{width: 'fit-content', wordBreak: 'break-all'}}>{item.title}</div> 
+                                                    <div><TypeChip type={item.type}/></div>
+                                                </div>
+                                            )
+                                        })}
+                                    </ol>
                                 </div>
                             )
                            }
                            return <></>
                         }
                         )}
-                        {!(travelPlan?.country && travelPlan?.response?.length) && <div className={classes.emptyListText}><div>Nothing to see here.</div><div>Build your travel plan now!</div></div>}
+                        {showLoader && <LoaderBox/>}
+                        {!(travelPlan?.country && travelPlan?.response?.length) && !showLoader && <div className={classes.emptyListText}><div>Nothing to see here.</div><div>Build your travel plan now!</div></div>}
                     </div>
                 </div>
             </div>
